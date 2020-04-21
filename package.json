@@ -73,10 +73,7 @@
     "redux": "^4.0.1",
     "redux-form": "^8.1.0",
     "superagent": "^4.1.0",
-    "video-react": "^0.13.2",
-    "webpack": "4.19.1",
-    "webpack-manifest-plugin": "2.0.4",
-    "workbox-webpack-plugin": "3.6.3"
+    "video-react": "^0.13.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -96,7 +93,6 @@
   "devDependencies": {
     "babel-plugin-react-transform": "^3.0.0",
     "react-transform-catch-errors": "^1.0.2",
-    "redbox-react": "^1.6.0",
-    "webpack": "^4.29.5"
+    "redbox-react": "^1.6.0"
   }
 }
