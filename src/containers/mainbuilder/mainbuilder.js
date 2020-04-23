@@ -10,6 +10,7 @@ import Ecommerce_product_edit from '../MainContent/Ecommerce/Ecommerce_product_e
 import Ecommerce_product_grid from '../MainContent/Ecommerce/Ecommerce_product_grid';
 import Ecommerce_product_list from '../MainContent/Ecommerce/Ecommerce_product_list';
 
+
 import Email_compose from '../MainContent/Email/Email_compose';
 import Email_inbox from '../MainContent/Email/Email_inbox';
 import Email_read from '../MainContent/Email/Email_read';
@@ -102,6 +103,11 @@ import Widgets from '../MainContent/Widgets/widgets';
 
 import { Route,Switch } from 'react-router-dom';
 
+// new imports
+import ManageProducts from "../../components/Products/ManageProducts";
+import AddProducts from "../../components/Products/AddProducts";
+
+
 class mainbuilder extends Component{
     render(){
         return(
@@ -115,6 +121,10 @@ class mainbuilder extends Component{
                    <Route path="/ecommerce_product_edit" component={Ecommerce_product_edit} />
                    <Route path="/ecommerce_product_grid" component={Ecommerce_product_grid} />
                    <Route path="/ecommerce_product_list" component={Ecommerce_product_list} />
+
+                    {/*  new routes */}
+                    <Route path="/manage_products" component={ManageProducts} />
+                    <Route path="/add_products" component={AddProducts} />
 
                    <Route path="/email_compose" component={Email_compose} />
                    <Route path="/email_inbox" component={Email_inbox} />
@@ -210,6 +220,8 @@ class mainbuilder extends Component{
                     <Route path="/dashboard2" component={Dashboard2} />
                     <Route path="/" component={Dashboard1} />
                     
+                   
+
                 </Switch>
         );
     }
