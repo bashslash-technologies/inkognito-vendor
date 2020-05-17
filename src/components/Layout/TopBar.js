@@ -12,7 +12,7 @@ class topbar extends Component {
         super(props);
         this.state = {
             Tab: 'index', SubTab: '', MoreTab: '',
-            dashboard_menu : false ,  ui_menu : false, comp_menu : false, page_menu : false,  eco_menu: false,
+            dashboard_menu : false ,  ui_menu : false, comp_menu : false, page_menu : false,  eco_menu: false,pro_menu: false,
             dropdownOpen: false,
             dropdownOpen1: false,
             dropdownOpenprofile: false,
@@ -424,6 +424,18 @@ class topbar extends Component {
                                     <li id="dest_id"><Link className={this.state.SubTab === 'ecommerce_product_edit' ? 'active-menu':''} onClick={this.setActiveTab.bind(this, 'eco','ecommerce_product_edit','')} to="ecommerce_product_edit">Product Edit</Link></li>
                                 </ul>
                             </li>
+
+                            <li className={this.state.Tab === 'pro' ? 'has-submenu active':'has-submenu'}>
+                                <Link to="#"  onClick={()=> this.setState({ pro_menu: !this.state.pro_menu }) }><i className="mdi mdi-cart-outline"></i>Products</Link>
+                                <ul className={this.state.pro_menu ? "submenu megamenu open" : "submenu megamenu" }>
+                                    <li id="dest_id"><Link className={this.state.SubTab === 'manage_products' ? 'active-menu':''} onClick={this.setActiveTab.bind(this, 'pro','manage_products','')} to="manage_products">Manage Products</Link></li><br></br>
+                                    <li id="dest_id"><Link className={this.state.SubTab === 'ecommerce_product_grid' ? 'active-menu':''} onClick={this.setActiveTab.bind(this, 'eco','ecommerce_product_grid','')} to="add_products">Add Product</Link></li><br></br>
+                                    <li id="dest_id"><Link className={this.state.SubTab === 'ecommerce_order_history' ? 'active-menu':''} onClick={this.setActiveTab.bind(this, 'eco','ecommerce_order_history','')} to="ecommerce_order_history">Order History</Link></li><br></br>
+                                    <li id="dest_id"><Link className={this.state.SubTab === 'ecommerce_customers' ? 'active-menu':''} onClick={this.setActiveTab.bind(this, 'eco','ecommerce_customers','')} to="ecommerce_customers">Customers</Link></li><br></br>
+                                    <li id="dest_id"><Link className={this.state.SubTab === 'ecommerce_product_edit' ? 'active-menu':''} onClick={this.setActiveTab.bind(this, 'eco','ecommerce_product_edit','')} to="ecommerce_product_edit">Product Edit</Link></li>
+                                </ul>
+                            </li>
+                            
 
                             <li>
                                 <Link to="/"><i className="mdi mdi-airplane"></i>Front End</Link>
