@@ -1,5 +1,4 @@
 import React , {Component } from 'react';
-import AUX from '../../hoc/Aux_';
 import {PieChart} from 'react-easy-chart';
 
 class dashboard1 extends Component{

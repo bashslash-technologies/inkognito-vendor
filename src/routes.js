@@ -4,8 +4,8 @@ import ProductsList from "./views/admin/products/ProductsList";
 import ProductsDetail from "./views/admin/products/ProductsDetail";
 import OrdersList from "./views/admin/orders/OrdersList";
 import OrdersDetail from "./views/admin/orders/OrdersDetail";
-import PaymentsList from "./views/admin/payments/PaymentsList";
-import PaymentsDetail from "./views/admin/payments/PaymentsDetail";
+import TransactionsList from "./views/admin/transactions/TransactionsList";
+import TransactionsDetail from "./views/admin/transactions/TransactionsDetail";
 import CashoutsList from "./views/admin/cashouts/CashoutsList";
 import CashoutsDetail from "./views/admin/cashouts/CashoutsDetail";
 import Settings from "./views/admin/Settings";
@@ -47,13 +47,13 @@ export default [
 		layout: '/admin'
 	},
 	{
-		path: "payments",
-		component: PaymentsList,
+		path: "transactions",
+		component: TransactionsList,
 		layout: '/admin'
 	},
 	{
-		path: "payments/:payment_id",
-		component: PaymentsDetail,
+		path: "transactions/:payment_id",
+		component: TransactionsDetail,
 		layout: '/admin'
 	},
 	{

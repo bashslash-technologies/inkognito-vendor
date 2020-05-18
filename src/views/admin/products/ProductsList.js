@@ -3,15 +3,14 @@ import { Link } from 'react-router-dom';
 import {
     SideSheet, Position,
     Pane, TextInputField,
-    FilePicker, Heading,
+    TagInput, Heading,
     Label, toaster,
     Textarea, SelectMenu,
-    Text, TagInput
 } from 'evergreen-ui';
 import { times } from 'lodash';
 import { Get, Post } from '../../../util/transport';
 import Dropzone from 'react-dropzone';
-import { Row, Col, Breadcrumb, BreadcrumbItem, Card, CardBody } from 'reactstrap';
+import { Row, Col, Card } from 'reactstrap';
 
 const ProductsList = () => {
 

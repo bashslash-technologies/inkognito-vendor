@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const Sidebar = () => {
 
@@ -21,7 +21,7 @@ const Sidebar = () => {
 					<NavLink className="nav-link" activeClassName="nav-active" to="/admin/orders"><i className="mdi mdi-cart-outline mr-3"></i>Orders</NavLink>
 				</li>
 				<li>
-					<NavLink className="nav-link" activeClassName="nav-active" to="/admin/payments"><i className="mdi mdi-transfer mr-3"></i>Transactions</NavLink>
+					<NavLink className="nav-link" activeClassName="nav-active" to="/admin/transactions"><i className="mdi mdi-transfer mr-3"></i>Transactions</NavLink>
 				</li>
 				<li>
 					<NavLink className="nav-link" activeClassName="nav-active" to="/admin/cashouts"><i className="mdi mdi-wallet mr-3"></i>Cashouts</NavLink>

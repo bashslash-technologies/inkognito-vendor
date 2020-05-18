@@ -1,5 +1,4 @@
 import React , {Component } from 'react';
-import AUX from '../../../hoc/Aux_';
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
 
@@ -48,7 +47,7 @@ render(){
       ];
       const { selectedOption1 } = this.state;
     return(
-           <AUX>
+           <>
 		    <div className="wrapper">
             <div className="container-fluid">
                     <div className="row">
@@ -182,7 +181,7 @@ render(){
 
                 </div> 
             </div>
-           </AUX>
+           </>
         );
     }
 }
