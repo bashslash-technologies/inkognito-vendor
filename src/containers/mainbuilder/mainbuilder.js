@@ -103,9 +103,6 @@ import Widgets from '../MainContent/Widgets/widgets';
 
 import { Route,Switch } from 'react-router-dom';
 
-// new imports
-import ManageProducts from "../../components/Products/ManageProducts";
-import AddProducts from "../../components/Products/AddProducts";
 
 
 class mainbuilder extends Component{
@@ -114,111 +111,107 @@ class mainbuilder extends Component{
                 <Switch> 
 
                     
-                   <Route path="/calendar" component={Calendar} />
+                   <Route path="/tempo/calendar" component={Calendar} />
 
-                   <Route path="/ecommerce_customers" component={Ecommerce_customers} />
-                   <Route path="/ecommerce_order_history" component={Ecommerce_order_history} />
-                   <Route path="/ecommerce_product_edit" component={Ecommerce_product_edit} />
-                   <Route path="/ecommerce_product_grid" component={Ecommerce_product_grid} />
-                   <Route path="/ecommerce_product_list" component={Ecommerce_product_list} />
+                   <Route path="/tempo/ecommerce_customers" component={Ecommerce_customers} />
+                   <Route path="/tempo/ecommerce_order_history" component={Ecommerce_order_history} />
+                   <Route path="/tempo/ecommerce_product_edit" component={Ecommerce_product_edit} />
+                   <Route path="/tempo/ecommerce_product_grid" component={Ecommerce_product_grid} />
+                   <Route path="/tempo/ecommerce_product_list" component={Ecommerce_product_list} />
 
-                    {/*  new routes */}
-                    <Route path="/manage_products" component={ManageProducts} />
-                    <Route path="/add_products" component={AddProducts} />
+                   <Route path="/tempo/email_compose" component={Email_compose} />
+                   <Route path="/tempo/email_inbox" component={Email_inbox} />
+                   <Route path="/tempo/email_read" component={Email_read} />
+                   <Route path="/tempo/email_templates_alert" component={Email_templates_alert} />
+                   <Route path="/tempo/email_templates_basic" component={Email_templates_basic} />
+                   <Route path="/tempo/email_templates_billing" component={Email_templates_billing} />
 
-                   <Route path="/email_compose" component={Email_compose} />
-                   <Route path="/email_inbox" component={Email_inbox} />
-                   <Route path="/email_read" component={Email_read} />
-                   <Route path="/email_templates_alert" component={Email_templates_alert} />
-                   <Route path="/email_templates_basic" component={Email_templates_basic} />
-                   <Route path="/email_templates_billing" component={Email_templates_billing} />
-
-                   <Route path="/form_advanced" component={Form_advanced} />
-                   <Route path="/form_editors" component={Form_editors} />
-                   <Route path="/form_elements" component={Form_elements} />
-                   <Route path="/form_mask" component={Form_mask} />
-                   <Route path="/form_summernote" component={Form_summernote} />
-                   <Route path="/form_uploads" component={Form_uploads} />
-                   <Route path="/form_validation" component={Form_validation} />
-                   <Route path="/form_wizard" component={Form_wizard} />
-                   <Route path="/form_xeditable" component={Form_xeditable} />
+                   <Route path="/tempo/form_advanced" component={Form_advanced} />
+                   <Route path="/tempo/form_editors" component={Form_editors} />
+                   <Route path="/tempo/form_elements" component={Form_elements} />
+                   <Route path="/tempo/form_mask" component={Form_mask} />
+                   <Route path="/tempo/form_summernote" component={Form_summernote} />
+                   <Route path="/tempo/form_uploads" component={Form_uploads} />
+                   <Route path="/tempo/form_validation" component={Form_validation} />
+                   <Route path="/tempo/form_wizard" component={Form_wizard} />
+                   <Route path="/tempo/form_xeditable" component={Form_xeditable} />
                    
-                   <Route path="/icons_dripicons" component={Icons_dripicons} />
-                   <Route path="/icons_fontawesome" component={Icons_fontawesome} />
-                   <Route path="/icons_ion" component={Icons_ion} />
-                   <Route path="/icons_material" component={Icons_material} />
-                   <Route path="/icons_mobirise" component={Icons_mobirise} />
-                   <Route path="/icons_themify" component={Icons_themify} />
-                   <Route path="/icons_typicons" component={Icons_typicons} />
-                   <Route path="/icons_weather" component={Icons_weather} />
+                   <Route path="/tempo/icons_dripicons" component={Icons_dripicons} />
+                   <Route path="/tempo/icons_fontawesome" component={Icons_fontawesome} />
+                   <Route path="/tempo/icons_ion" component={Icons_ion} />
+                   <Route path="/tempo/icons_material" component={Icons_material} />
+                   <Route path="/tempo/icons_mobirise" component={Icons_mobirise} />
+                   <Route path="/tempo/icons_themify" component={Icons_themify} />
+                   <Route path="/tempo/icons_typicons" component={Icons_typicons} />
+                   <Route path="/tempo/icons_weather" component={Icons_weather} />
 
-                   <Route path="/maps_google" component={Maps_google} />
-                   <Route path="/maps_vector" component={Maps_vector} />
+                   <Route path="/tempo/maps_google" component={Maps_google} />
+                   <Route path="/tempo/maps_vector" component={Maps_vector} />
                    
-                   <Route path="/pages_400" component={Pages_400} />
-                   <Route path="/pages_timeline" component={Pages_timeline} />
-                   <Route path="/pages_500" component={Pages_500} />
-                   <Route path="/pages_blank" component={Pages_blank} />
-                   <Route path="/pages_coming_soon" component={Pages_coming_soon} />
-                   <Route path="/pages_contact" component={Pages_contact} />
-                   <Route path="/pages_directory" component={Pages_directory} />
-                   <Route path="/pages_faq" component={Pages_faq} />
-                   <Route path="/pages_gallery" component={Pages_gallery} />
-                   <Route path="/pages_invoice" component={Pages_invoice} />
-                   <Route path="/pages_lock_screen" component={Pages_lock_screen} />
-                   <Route path="/pages_lock_screen_2" component={Pages_lock_screen_2} />
-                   <Route path="/pages_login" component={Pages_login} />
-                   <Route path="/pages_login_2" component={Pages_login_2} />
-                   <Route path="/pages_maintenance" component={Pages_maintenance} />
-                   <Route path="/pages_pricing" component={Pages_pricing} />
-                   <Route path="/pages_recoverpw" component={Pages_recoverpw} />
-                   <Route path="/pages_recoverpw_2" component={Pages_recoverpw_2} />
-                   <Route path="/pages_register" component={Pages_register} />
-                   <Route path="/pages_register_2" component={Pages_register_2} />
+                   <Route path="/tempo/pages_400" component={Pages_400} />
+                   <Route path="/tempo/pages_timeline" component={Pages_timeline} />
+                   <Route path="/tempo/pages_500" component={Pages_500} />
+                   <Route path="/tempo/pages_blank" component={Pages_blank} />
+                   <Route path="/tempo/pages_coming_soon" component={Pages_coming_soon} />
+                   <Route path="/tempo/pages_contact" component={Pages_contact} />
+                   <Route path="/tempo/pages_directory" component={Pages_directory} />
+                   <Route path="/tempo/pages_faq" component={Pages_faq} />
+                   <Route path="/tempo/pages_gallery" component={Pages_gallery} />
+                   <Route path="/tempo/pages_invoice" component={Pages_invoice} />
+                   <Route path="/tempo/pages_lock_screen" component={Pages_lock_screen} />
+                   <Route path="/tempo/pages_lock_screen_2" component={Pages_lock_screen_2} />
+                   <Route path="/tempo/pages_login" component={Pages_login} />
+                   <Route path="/tempo/pages_login_2" component={Pages_login_2} />
+                   <Route path="/tempo/pages_maintenance" component={Pages_maintenance} />
+                   <Route path="/tempo/pages_pricing" component={Pages_pricing} />
+                   <Route path="/tempo/pages_recoverpw" component={Pages_recoverpw} />
+                   <Route path="/tempo/pages_recoverpw_2" component={Pages_recoverpw_2} />
+                   <Route path="/tempo/pages_register" component={Pages_register} />
+                   <Route path="/tempo/pages_register_2" component={Pages_register_2} />
                    
-                   <Route path="/tables_basic" component={Tables_basic} />
-                   <Route path="/tables_datatable" component={Tables_datatable} />
-                   <Route path="/tables_editable" component={Tables_editable} />
-                   <Route path="/tables_responsive" component={Tables_responsive} />
+                   <Route path="/tempo/tables_basic" component={Tables_basic} />
+                   <Route path="/tempo/tables_datatable" component={Tables_datatable} />
+                   <Route path="/tempo/tables_editable" component={Tables_editable} />
+                   <Route path="/tempo/tables_responsive" component={Tables_responsive} />
                    
-                   <Route path="/ui_alertify" component={Ui_alertify} />
-                   <Route path="/ui_alerts" component={Ui_alerts} />
-                   <Route path="/ui_animation" component={Ui_animation} />
-                   <Route path="/ui_badge" component={Ui_badge} />
-                   <Route path="/ui_buttons" component={Ui_buttons} />
-                   <Route path="/ui_cards" component={Ui_cards} />
-                   <Route path="/ui_carousel" component={Ui_carousel} />
-                   <Route path="/ui_colors" component={Ui_colors} />
-                   <Route path="/ui_dropdowns" component={Ui_dropdowns} />
-                   <Route path="/ui_grid" component={Ui_grid} />
-                   <Route path="/ui_highlight" component={Ui_highlight} />
-                   <Route path="/ui_images" component={Ui_images} />
-                   <Route path="/ui_lightbox" component={Ui_lightbox} />
-                   <Route path="/ui_modals" component={Ui_modals} />
-                   <Route path="/ui_navs" component={Ui_navs} />
-                   <Route path="/ui_nestable" component={Ui_nestable} />
-                   <Route path="/ui_pagination" component={Ui_pagination} />
-                   <Route path="/ui_popover_tooltips" component={Ui_popover_tooltips} />
-                   <Route path="/ui_progressbars" component={Ui_progressbars} />
-                   <Route path="/ui_rangeslider" component={Ui_rangeslider} />
-                   <Route path="/ui_rating" component={Ui_rating} />
-                   <Route path="/ui_sessiontimeout" component={Ui_sessiontimeout} />
-                   <Route path="/ui_sweet_alert" component={Ui_sweet_alert} />
-                   <Route path="/ui_tabs_accordions" component={Ui_tabs_accordions} />
-                   <Route path="/ui_typography" component={Ui_typography} />
-                   <Route path="/ui_video" component={Ui_video} />
+                   <Route path="/tempo/ui_alertify" component={Ui_alertify} />
+                   <Route path="/tempo/ui_alerts" component={Ui_alerts} />
+                   <Route path="/tempo/ui_animation" component={Ui_animation} />
+                   <Route path="/tempo/ui_badge" component={Ui_badge} />
+                   <Route path="/tempo/ui_buttons" component={Ui_buttons} />
+                   <Route path="/tempo/ui_cards" component={Ui_cards} />
+                   <Route path="/tempo/ui_carousel" component={Ui_carousel} />
+                   <Route path="/tempo/ui_colors" component={Ui_colors} />
+                   <Route path="/tempo/ui_dropdowns" component={Ui_dropdowns} />
+                   <Route path="/tempo/ui_grid" component={Ui_grid} />
+                   <Route path="/tempo/ui_highlight" component={Ui_highlight} />
+                   <Route path="/tempo/ui_images" component={Ui_images} />
+                   <Route path="/tempo/ui_lightbox" component={Ui_lightbox} />
+                   <Route path="/tempo/ui_modals" component={Ui_modals} />
+                   <Route path="/tempo/ui_navs" component={Ui_navs} />
+                   <Route path="/tempo/ui_nestable" component={Ui_nestable} />
+                   <Route path="/tempo/ui_pagination" component={Ui_pagination} />
+                   <Route path="/tempo/ui_popover_tooltips" component={Ui_popover_tooltips} />
+                   <Route path="/tempo/ui_progressbars" component={Ui_progressbars} />
+                   <Route path="/tempo/ui_rangeslider" component={Ui_rangeslider} />
+                   <Route path="/tempo/ui_rating" component={Ui_rating} />
+                   <Route path="/tempo/ui_sessiontimeout" component={Ui_sessiontimeout} />
+                   <Route path="/tempo/ui_sweet_alert" component={Ui_sweet_alert} />
+                   <Route path="/tempo/ui_tabs_accordions" component={Ui_tabs_accordions} />
+                   <Route path="/tempo/ui_typography" component={Ui_typography} />
+                   <Route path="/tempo/ui_video" component={Ui_video} />
 
-                   <Route path="/widgets" component={Widgets} />
+                   <Route path="/tempo/widgets" component={Widgets} />
 
-                   <Route path="/charts_easy" component={Charts_easy} />
-                   <Route path="/chartjs" component={Chartjs} />
-                   <Route path="/apexchart" component={ApexChart} />
-                   <Route path="/sparkline" component={SparkLine} />
+                   <Route path="/tempo/charts_easy" component={Charts_easy} />
+                   <Route path="/tempo/chartjs" component={Chartjs} />
+                   <Route path="/tempo/apexchart" component={ApexChart} />
+                   <Route path="/tempo/sparkline" component={SparkLine} />
                    
                    
                    
-                    <Route path="/dashboard2" component={Dashboard2} />
-                    <Route path="/" component={Dashboard1} />
+                    <Route path="/tempo/dashboard2" component={Dashboard2} />
+                    <Route path="/tempo/" component={Dashboard1} />
                     
                    
 

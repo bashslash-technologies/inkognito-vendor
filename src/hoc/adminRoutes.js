@@ -1,3 +1,26 @@
+import Dashboard from "../views/main/Dashboard";
+import ProductsList from "../views/main/products/ProductsList";
+import ProductsDetail from "../views/main/products/ProductsDetail";
+
+export default [
+	{
+		path: "dashboard",
+		component: Dashboard,
+	},
+	{
+		path: "products",
+		component: ProductsList,
+	},
+	{
+		path: "products/:product_id",
+		component: ProductsDetail,
+	},
+]
+
+
+
+
+/*
 import Dashboard1 from "../containers/MainContent/Dashboard/Dashboard1";
 import Dashboard2 from "../containers/MainContent/Dashboard/Dashboard2";
 
@@ -99,181 +122,187 @@ import SparkLine from "../containers/MainContent/Charts/SparkLine";
 import Widgets from "../containers/MainContent/Widgets/widgets";
 
 export default [
-  {
-    path: "/ink/",
-    component: Dashboard1,
-  },
-  {
-    path: "/ink/calendar",
-    component: Calendar,
-  },
-  {
-    path: "/ink/ecommerce_customers",
-    component: Ecommerce_customers,
-  },
-  {
-    path: "/ink/ecommerce_order_history",
-    component: Ecommerce_order_history,
-  },
-  {
-    path: "/ink/ecommerce_product_edit",
-    component: Ecommerce_product_edit,
-  },
-  {
-    path: "/ink/ecommerce_product_grid",
-    component: Ecommerce_product_grid,
-  },
-  {
-    path: "/ink/ecommerce_product_list",
-    component: Ecommerce_product_list,
-  },
-  {
-    path: "/ink/email_compose",
-    component: Email_compose,
-  },
-  {
-    path: "/ink/email_inbox",
-    component: Email_inbox,
-  },
-  {
-    path: "/ink/email_read",
-    component: Email_read,
-  },
-  {
-    path: "/ink/email_templates_alert",
-    component: Email_templates_alert,
-  },
-  {
-    path: "/ink/email_templates_basic",
-    component: Email_templates_basic,
-  },
-  {
-    path: "/ink/email_templates_billing",
-    component: Email_templates_billing,
-  },
-  {
-    path: "/ink/form_advanced",
-    component: Form_advanced,
-  },
-  {
-    path: "/ink/form_editors",
-    component: Form_editors,
-  },
-  {
-    path: "/ink/form_elements",
-    component: Form_elements,
-  },
-  {
-    path: "/ink/form_mask",
-    component: Form_mask,
-  },
-  {
-    path: "/ink/form_summernote",
-    component: Form_summernote,
-  },
-  {
-    path: "/ink/form_uploads",
-    component: Form_uploads,
-  },
-  {
-    path: "/ink/form_validation",
-    component: Form_validation,
-  },
-  {
-    path: "/ink/form_wizard",
-    component: Form_wizard,
-  },
-  {
-    path: "/ink/form_xeditable",
-    component: Form_xeditable,
-  },
-  {
-    path: "/ink/maps_google",
-    component: Maps_google,
-  },
-  //Todo: contine the routes from here
-  {
-    path: "/ink/",
-    component: Dashboard1,
-  },
-  {
-    path: "/ink/",
-    component: Dashboard1,
-  },
-  {
-    path: "/ink/",
-    component: Dashboard1,
-  },
-  {
-    path: "/ink/",
-    component: Dashboard1,
-  },
-  {
-    path: "/ink/",
-    component: Dashboard1,
-  },
-  {
-    path: "/ink/",
-    component: Dashboard1,
-  },
-  {
-    path: "/ink/",
-    component: Dashboard1,
-  },
-  {
-    path: "/ink/",
-    component: Dashboard1,
-  },
-  {
-    path: "/ink/",
-    component: Dashboard1,
-  },
-  {
-    path: "/ink/",
-    component: Dashboard1,
-  },
-  {
-    path: "/ink/",
-    component: Dashboard1,
-  },
-  {
-    path: "/ink/",
-    component: Dashboard1,
-  },
-  {
-    path: "/ink/",
-    component: Dashboard1,
-  },
-  {
-    path: "/ink/",
-    component: Dashboard1,
-  },
-  {
-    path: "/ink/",
-    component: Dashboard1,
-  },
-  {
-    path: "/ink/",
-    component: Dashboard1,
-  },
-  {
-    path: "/ink/",
-    component: Dashboard1,
-  },
-  {
-    path: "/ink/",
-    component: Dashboard1,
-  },
-  {
-    path: "/ink/",
-    component: Dashboard1,
-  },
-  {
-    path: "/ink/",
-    component: Dashboard1,
-  },
-  {
-    path: "/ink/",
-    component: Dashboard1,
-  },
+	{
+		path: "/ink/",
+		component: Dashboard1,
+	},
+	{
+		path: "/dasboard2",
+		component: Dashboard2,
+	},
+	{
+		path: "/ink/calendar",
+		component: Calendar,
+	},
+	{
+		path: "/ink/ecommerce_customers",
+		component: Ecommerce_customers,
+	},
+	{
+		path: "/ink/ecommerce_order_history",
+		component: Ecommerce_order_history,
+	},
+	{
+		path: "/ink/ecommerce_product_edit",
+		component: Ecommerce_product_edit,
+	},
+	{
+		path: "/ink/ecommerce_product_grid",
+		component: Ecommerce_product_grid,
+	},
+	{
+		path: "/ink/ecommerce_product_list",
+		component: Ecommerce_product_list,
+	},
+	{
+		path: "/ink/email_compose",
+		component: Email_compose,
+	},
+	{
+		path: "/ink/email_inbox",
+		component: Email_inbox,
+	},
+	{
+		path: "/ink/email_read",
+		component: Email_read,
+	},
+	{
+		path: "/ink/email_templates_alert",
+		component: Email_templates_alert,
+	},
+	{
+		path: "/ink/email_templates_basic",
+		component: Email_templates_basic,
+	},
+	{
+		path: "/ink/email_templates_billing",
+		component: Email_templates_billing,
+	},
+	{
+		path: "/ink/form_advanced",
+		component: Form_advanced,
+	},
+	{
+		path: "/ink/form_editors",
+		component: Form_editors,
+	},
+	{
+		path: "/ink/form_elements",
+		component: Form_elements,
+	},
+	{
+		path: "/ink/form_mask",
+		component: Form_mask,
+	},
+	{
+		path: "/ink/form_summernote",
+		component: Form_summernote,
+	},
+	{
+		path: "/ink/form_uploads",
+		component: Form_uploads,
+	},
+	{
+		path: "/ink/form_validation",
+		component: Form_validation,
+	},
+	{
+		path: "/ink/form_wizard",
+		component: Form_wizard,
+	},
+	{
+		path: "/ink/form_xeditable",
+		component: Form_xeditable,
+	},
+	{
+		path: "/ink/maps_google",
+		component: Maps_google,
+	},
+	//Todo: contine the routes from here
+	{
+		path: "/ink/",
+		component: Dashboard1,
+	},
+	{
+		path: "/ink/",
+		component: Dashboard1,
+	},
+	{
+		path: "/ink/",
+		component: Dashboard1,
+	},
+	{
+		path: "/ink/",
+		component: Dashboard1,
+	},
+	{
+		path: "/ink/",
+		component: Dashboard1,
+	},
+	{
+		path: "/ink/",
+		component: Dashboard1,
+	},
+	{
+		path: "/ink/",
+		component: Dashboard1,
+	},
+	{
+		path: "/ink/",
+		component: Dashboard1,
+	},
+	{
+		path: "/ink/",
+		component: Dashboard1,
+	},
+	{
+		path: "/ink/",
+		component: Dashboard1,
+	},
+	{
+		path: "/ink/",
+		component: Dashboard1,
+	},
+	{
+		path: "/ink/",
+		component: Dashboard1,
+	},
+	{
+		path: "/ink/",
+		component: Dashboard1,
+	},
+	{
+		path: "/ink/",
+		component: Dashboard1,
+	},
+	{
+		path: "/ink/",
+		component: Dashboard1,
+	},
+	{
+		path: "/ink/",
+		component: Dashboard1,
+	},
+	{
+		path: "/ink/",
+		component: Dashboard1,
+	},
+	{
+		path: "/ink/",
+		component: Dashboard1,
+	},
+	{
+		path: "/ink/",
+		component: Dashboard1,
+	},
+	{
+		path: "/ink/",
+		component: Dashboard1,
+	},
+	{
+		path: "/ink/",
+		component: Dashboard1,
+	},
 ];
+
+*/

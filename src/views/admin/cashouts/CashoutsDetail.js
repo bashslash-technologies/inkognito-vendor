@@ -1,23 +1,27 @@
-import React , {useState } from 'react';
-import AUX from '../../hoc/Aux_';
-import { Sparklines,SparklinesLine  } from 'react-sparklines';
+import React , {Component } from 'react';
+import AUX from '../../../hoc/Aux_';
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
 
-export default function AddProducts(){
-const [selectedOption1, setselectedOption1] = useState(null);
-const [userdata, setUserData] = useState({});
+class ProductsDetail extends Component{
 
-   
-      const handleChange1 = (selectedOption1) => {
-        setselectedOption1({ selectedOption1 });
+    constructor(props) {
+        super(props);
+     
+        this.state = {
+          selectedOption1: null,
+        };
+
+        
+      }
+
+
+      handleChange1 = (selectedOption1) => {
+        this.setState({ selectedOption1 });
            console.log(`Option selected:`, selectedOption1);
       }
-//  where u left off
-      const Submit = (e) =>{
-          e.preventDefault();
-        console.log(e.value.target);
-      }
+ 
+render(){
 
     const options = [
         { value: 'Alaska', label: 'Alaska' },
@@ -42,7 +46,7 @@ const [userdata, setUserData] = useState({});
         { value: 'Virginia', label: 'Virginia' },
         { value: 'West Virginia', label: 'West Virginia' },
       ];
-
+      const { selectedOption1 } = this.state;
     return(
            <AUX>
 		    <div className="wrapper">
@@ -53,10 +57,10 @@ const [userdata, setUserData] = useState({});
                                 <div className="btn-group pull-right">
                                     <ol className="breadcrumb hide-phone p-0 m-0">
                                         <li className="breadcrumb-item"><Link to="#">Ecommerce</Link></li>
-                                        <li className="breadcrumb-item active">Add Product</li>
+                                        <li className="breadcrumb-item active">Product Edit</li>
                                     </ol>
                                 </div>
-                                <h4 className="page-title">Add Product</h4>
+                                <h4 className="page-title">Product Edit</h4>
                             </div>
                         </div>
                     </div>
@@ -69,7 +73,7 @@ const [userdata, setUserData] = useState({});
                                     <h4 className="mt-0 header-title">Basic Information</h4>
                                     <p className="text-muted m-b-30 font-14">Fill all information below</p>
 
-                                    <form onSubmit={Submit}>
+                                    <form>
                                         <div className="row">
                                             <div className="col-sm-6">
                                                 <div className="form-group">
@@ -114,7 +118,7 @@ const [userdata, setUserData] = useState({});
 
                                                     <Select
                                                         value={selectedOption1}
-                                                        onChange={handleChange1}
+                                                        onChange={this.handleChange1}
                                                         options={options}
                                                         isMulti ={true}
                                                     />
@@ -180,7 +184,7 @@ const [userdata, setUserData] = useState({});
             </div>
            </AUX>
         );
-
+    }
 }
 
-  
+export default ProductsDetail;   

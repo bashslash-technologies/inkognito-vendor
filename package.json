@@ -22,6 +22,7 @@
     "eslint-plugin-import": "2.14.0",
     "eslint-plugin-jsx-a11y": "6.1.2",
     "eslint-plugin-react": "7.11.1",
+    "evergreen-ui": "^4.27.4",
     "fullcalendar": "^3.10.0",
     "google-maps-react": "^2.0.2",
     "jquery": "^3.3.1",

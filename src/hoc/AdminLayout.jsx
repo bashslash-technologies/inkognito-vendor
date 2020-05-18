@@ -5,7 +5,7 @@ import adminRoutes from './adminRoutes'
 
 const getRoutes = routes => {
     return routes.map((route, key) => (
-        <Route exact path={route.path} component={route.component} />
+        <Route exact path={`/${route.path}`} component={route.component} />
     ))
 }
 
