@@ -128,7 +128,7 @@ class topbar extends Component {
                         <div className="logo">
                             <Link to="/" className="logo"></Link>
                             <Link to="/" className="logo">
-                                <img src="assets/images/logo-sm.png" alt="" height="30" />
+                                <img src={require("../assets/images/logo-sm.png")} alt="" height="30" />
                             </Link>
                         </div>
                         <div className="menu-extras topbar-custom">

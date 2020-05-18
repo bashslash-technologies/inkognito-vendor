@@ -369,6 +369,7 @@ body {
 }
 
 #topnav {
+  position: fixed;
   right: 0;
   left: 0;
   top: 0;
@@ -4742,6 +4743,8 @@ Invoice
     background-color: #263238;
     width: 200px;
     padding: 0;
+    height: 100vh;
+    padding-top: 70px;
   }
 
   #side-panel > ul 
@@ -4766,6 +4769,8 @@ Invoice
   #main-panel
   {
     overflow-y: scroll;
+    height: 100vh;
+    padding-top: 70px;
   }
   
   #main
@@ -4779,5 +4784,5 @@ Invoice
 
   a:hover
   {
-    color: #115e3e;
+    color: #37a174;
   }

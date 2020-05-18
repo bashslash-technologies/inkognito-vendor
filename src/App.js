@@ -10,7 +10,7 @@ const App = () => {
 			<Route path="/tempo" component={Tempo} />
 			<Route path="/admin" component={AdminLayout} />
 			<Route path="/auth" component={AuthLayout} />
-			<Redirect from="/" to="/admin" />
+			<Redirect from="/" to="/admin"/>
 		</Switch>
 	);
 };

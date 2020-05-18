@@ -8,6 +8,12 @@ import PaymentsList from "./views/admin/payments/PaymentsList";
 import PaymentsDetail from "./views/admin/payments/PaymentsDetail";
 import CashoutsList from "./views/admin/cashouts/CashoutsList";
 import CashoutsDetail from "./views/admin/cashouts/CashoutsDetail";
+import Settings from "./views/admin/Settings";
+
+import Login from "./views/auth/Login";
+import Register from "./views/auth/Register";
+import Forgot from "./views/auth/Forgot";
+import Setup from "./views/auth/Setup";
 
 export default [
 	{
@@ -61,13 +67,18 @@ export default [
 		layout: '/admin'
 	},
 	{
-		path: "signin",
-		component: ProductsDetail,
+		path: "settings",
+		component: Settings,
+		layout: '/admin'
+	},
+	{
+		path: "login",
+		component: Login,
 		layout: '/auth'
 	},
 	{
 		path: "register",
-		component: ProductsDetail,
+		component: Register,
 		layout: '/auth'
 	},
 	{
@@ -77,7 +88,7 @@ export default [
 	},
 	{
 		path: "forgot-password",
-		component: ProductsDetail,
+		component: Forgot,
 		layout: '/auth'
 	},
 	{
@@ -88,6 +99,11 @@ export default [
 	{
 		path: "verification-code",
 		component: ProductsDetail,
+		layout: '/auth'
+	},
+	{
+		path: "setup",
+		component: Setup,
 		layout: '/auth'
 	},
 ]

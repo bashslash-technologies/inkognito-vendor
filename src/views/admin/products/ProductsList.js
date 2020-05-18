@@ -177,7 +177,7 @@ const ProductsList = () => {
             <div className="row">
                 <div className="col-12">
                     <div className="card m-b-20">
-                        <div className="card-body">
+                        <div className="card-body m-0 p-0">
 
                             
 

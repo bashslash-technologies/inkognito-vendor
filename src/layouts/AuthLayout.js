@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import routes from '../routes'
 
 const getRoutes = routes => {
@@ -7,7 +7,7 @@ const getRoutes = routes => {
 		if(route.layout === "/auth") {
 			return <Route path={`/auth/${route.path}`} component={route.component} />
 		}
-		return (<> </>)
+		return null
 	})
 }
 
@@ -15,6 +15,7 @@ function Authlayout() {
     return (
         <Switch>
             {getRoutes(routes)}
+            <Redirect  from="/auth" to="/auth/login"/>
         </Switch>
     )
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import TopBar from "../components/TopBar";
 import Footer from "../components/Footer";
 import Sidebar from "../components/Sidebar";
@@ -10,7 +10,7 @@ const getRoutes = routes => {
 		if(route.layout === "/admin") {
 			return <Route path={`/admin/${route.path}`} component={route.component} />
 		}
-		return (<> </>)
+		return null
 	})
 }
 
@@ -28,6 +28,7 @@ function AdminLayout() {
 					<div className="wrap">
 						<Switch>
 							{getRoutes(routes)}
+							<Redirect  from="/admin" to="/admin/dashboard"/>
 						</Switch>
 					</div>
 					<Footer />
