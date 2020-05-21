@@ -1,5 +1,5 @@
 import React , {useState, useEffect} from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useHistory } from 'react-router-dom';
 import { toaster } from "evergreen-ui";
 import { Post } from "../../util/transport";
 import {
@@ -14,6 +14,7 @@ const Register = () => {
 	const [phone, setPhone] = useState('');
 	const [password, setPassword] = useState('');
 	const [loading, setLoading] = useState(false);
+	const {push} = useHistory()
 
 	const handleSubmit = () => {
 		setLoading(true)
@@ -35,26 +36,33 @@ const Register = () => {
 		if(!password) {
 			setLoading(false)
 			toaster.warning("kindly choose a password")
-			return 
+			return
 		}
 		Post('/users/create', {
 			email,
 			name,
-			contact: phone,
+			contact: phone.slice(-9),
 			password,
 			role: 'VENDOR'
 		})
 		.then(({data})=>{
 			setLoading(false)
+			console.log(data)
 			if(!data.success){
 				toaster.warning(data.message);
 			}
 			else {
+				push('/auth/verify-phone',{
+					state:{
+						data:data.payload
+					}
+				});
 				toaster.success(data.message);
-				setUser(data.payload.user);
+				// setUser(data.payload.user);
 			}
 		})
 		.catch((err)=>{
+			console.log(err)
 			setLoading(false)
 			toaster.danger(err.message)
 		})
@@ -125,12 +133,12 @@ const Register = () => {
 										id="userpassword"
 										placeholder="Enter password"
 										onChange={(e)=>setPassword(e.target.value)}
-									/> 
+									/>
 								</div>
 
 								<div className="form-group row m-t-20">
 									<div className="col-12 text-right">
-										<button onClick={handleSubmit} className="btn btn-primary w-md waves-effect waves-light" type="submit">Register</button>
+										<button onClick={handleSubmit} disabled={loading} className="btn btn-primary w-md waves-effect waves-light" type="submit">{loading ? "Registering..." : 'Register'}</button>
 									</div>
 								</div>
 

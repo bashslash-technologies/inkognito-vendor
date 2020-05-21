@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { Link } from "react-router-dom";
+import { Link,useHistory } from "react-router-dom";
 import { toaster } from "evergreen-ui";
 import { Post } from "../../util/transport";
 import {
@@ -8,7 +8,7 @@ import {
 } from "../../util/storage";
 
 const  Login = () => {
-
+	const {push} = useHistory()
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [loading, setLoading] = useState(false);
@@ -23,7 +23,7 @@ const  Login = () => {
 		if(!password) {
 			setLoading(false)
 			toaster.warning("kindly enter your password")
-			return 
+			return
 		}
 		Post('/users/login', {
 			username,
@@ -35,9 +35,29 @@ const  Login = () => {
 				toaster.warning(data.message);
 			}
 			else {
+				console.log(data.payload.user.util)
+				if(data.payload.user.util){
+					push('/auth/verify-phone',{
+						state:{
+							data:data.payload
+						}
+					})
+					toaster.success("Please verify your account");
+					return;
+				}
+				if(!data.payload.user.documents.identification.verified){
+					push('/auth/setup',{
+						state:{
+							data:data.payload
+						}
+					})
+					toaster.success("Please setup your account");
+					return;
+				}
 				toaster.success(data.message);
 				setUser(data.payload.user);
 				setToken(data.payload.token);
+				push("/")
 			}
 		})
 		.catch((err)=>{

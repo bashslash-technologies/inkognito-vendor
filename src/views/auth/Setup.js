@@ -1,11 +1,26 @@
-import React , {useState} from 'react';
-import { Link } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import { Link,useHistory } from 'react-router-dom';
+import {toaster} from "evergreen-ui";
 
 const Setup = () => {
-
     const [page, setPage] = useState(0);
+	const {push, location} = useHistory();
+	const [username,setName] = useState("")
 
-    const handleNext = () => {
+	useEffect(()=>{
+		let token = location.state;
+		if(!token) {
+			push('/auth/login');
+			return toaster.warning("Error",{
+				description:"Your token expired, please login to continue"
+			})
+		}
+		console.log(token)
+		setName(location.state.state.data.user.email)
+	},[])
+
+
+	const handleNext = () => {
         setPage(page === 3 ? 3 : page+1)
     }
     const handlePrev = () => {
@@ -14,6 +29,8 @@ const Setup = () => {
     const handleSubmit = () => {
         alert('submitted')
     }
+
+
 
     return(
 		<>
@@ -35,7 +52,7 @@ const Setup = () => {
                                 <p className="text-muted text-center">
                                     Kindly complete the set up process to continue to InKognito.
                                 </p>
-                                
+
                                 <div className="form-group row m-t-20">
                                     <div className="col-sm-6">
                                     </div>
@@ -50,7 +67,7 @@ const Setup = () => {
                                 </div>
                             </>}
 
-							{page === 1 && 
+							{page === 1 &&
                             <>
                                 <h4 className="font-18 m-b-5 text-center">Business Details</h4>
                                 <p className="text-muted text-center">
@@ -106,8 +123,8 @@ const Setup = () => {
                                     </div>
                                 </form>
                             </>}
-						
-							{page === 2 && 
+
+							{page === 2 &&
                             <>
                                 <h4 className="font-18 m-b-5 text-center">Owner Details</h4>
                                 <p className="text-muted text-center">
@@ -160,8 +177,8 @@ const Setup = () => {
                                     </div>
                                 </form>
                             </>}
-						
-							{page === 3 && 
+
+							{page === 3 &&
                             <>
                                 <h4 className="font-18 m-b-5 text-center">Preview</h4>
                                 <p className="text-muted text-center">
@@ -259,4 +276,4 @@ const Setup = () => {
     );
 }
 
-export default Setup;   
+export default Setup;
