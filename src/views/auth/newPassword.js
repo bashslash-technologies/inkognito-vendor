@@ -1,31 +1,48 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link,useHistory} from 'react-router-dom';
-import {Get} from "../../util/transport";
+import {Get,Post} from "../../util/transport";
 import {toaster} from "evergreen-ui";
 
-const Forgot = () => {
-	const  {push} = useHistory()
+const NewPassword = () => {
+    const  {push,location} = useHistory()
     const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirm, setConfirm] = useState('');
     const [loading, setLoading] = useState(false);
+
+    useEffect(()=>{
+        let token = location.state;
+        if(!token) {
+            push('/auth/login');
+            return toaster.warning("Error",{
+                description:"Your token expired, please login to continue"
+            })
+        }
+        setEmail(location.state.state.data.user._id)
+    },[])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setLoading(true)
-        Get(`/users/reset?username=${email}`).then(({data}) => {
-            setLoading(false)
-			if(!data.success){
-				toaster.warning(data.message);
-			}else{
-				console.log(data)
-				push('/auth/verify-forgot-password',{
-					state:{
-						data:data.payload
-					}
-				})
-			}
+
+        if(password.trim() !== confirm.trim())
+            return toaster.warning("Error",{
+                description:"Passwords do not match"
+            });
+
+        setLoading(true);
+        Post(`/users/password?user_id=${email}`,{
+            password
+        }).then(({data}) => {
+            setLoading(false);
+            if(!data.success){
+                toaster.warning(data.message);
+            }else{
+                push('/auth/login');
+                toaster.warning(data.message || "Success");
+            }
         }).catch((err) => {
-			setLoading(false)
-			toaster.danger(err.message)
+            setLoading(false);
+            toaster.danger(err.message)
         })
     }
     return (
@@ -50,15 +67,25 @@ const Forgot = () => {
                             <form className="form-horizontal m-t-30" onSubmit={handleSubmit}>
 
                                 <div className="form-group">
-                                    <label for="useremail">Email</label>
+                                    <label>Confirm</label>
                                     <input
-                                        type="email"
+                                        type="password"
                                         className="form-control"
-                                        id="useremail"
-                                        value={email}
+                                        value={password}
                                         required={true}
-                                        placeholder="Enter email"
-                                        onChange={(e) => setEmail(e.target.value)}
+                                        placeholder="Enter new password"
+                                        onChange={(e) => setPassword(e.target.value)}
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label>Confirm Password</label>
+                                    <input
+                                        type="password"
+                                        className="form-control"
+                                        value={confirm}
+                                        required={true}
+                                        placeholder="Confirm your password"
+                                        onChange={(e) => setConfirm(e.target.value)}
                                     />
                                 </div>
 
@@ -87,4 +114,4 @@ const Forgot = () => {
     );
 }
 
-export default Forgot;
+export default NewPassword;

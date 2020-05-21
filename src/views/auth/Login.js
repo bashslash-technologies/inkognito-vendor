@@ -130,10 +130,11 @@ const  Login = () => {
 									</div>
 									<div className="col-sm-6 text-right">
 										<button
+											disabled={loading}
 											className="btn btn-primary w-md waves-effect waves-light"
 											onClick={handleSubmit}
 										>
-											Log In
+											{loading ? "Logging in" : 'Login'}
 										</button>
 									</div>
 								</div>

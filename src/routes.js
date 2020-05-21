@@ -15,6 +15,8 @@ import Register from "./views/auth/Register";
 import Forgot from "./views/auth/Forgot";
 import Setup from "./views/auth/Setup";
 import Verify from "./views/auth/Verify";
+import VerifyForgot from "./views/auth/VerifyForgot";
+import NewPassword from "./views/auth/newPassword";
 
 export default [
 	{
@@ -91,10 +93,14 @@ export default [
 		path: "forgot-password",
 		component: Forgot,
 		layout: '/auth'
+	},{
+		path: "verify-forgot-password",
+		component: VerifyForgot,
+		layout: '/auth'
 	},
 	{
 		path: "reset-password",
-		component: ProductsDetail,
+		component: NewPassword,
 		layout: '/auth'
 	},
 	{
