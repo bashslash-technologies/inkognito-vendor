@@ -1,5 +1,11 @@
-import React , {useState} from 'react';
+import React , {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
+import { toaster } from "evergreen-ui";
+import { Post } from "../../util/transport";
+import {
+	setToken, setUser,
+	removeToken, removeUser
+} from "../../util/storage";
 
 const Register = () => {
 
@@ -11,10 +17,54 @@ const Register = () => {
 
 	const handleSubmit = () => {
 		setLoading(true)
-		alert("submitted")
-		setLoading(false)
+		if(!email) {
+			setLoading(false)
+			toaster.warning("kindly enter an email")
+			return
+		}
+		if(!name) {
+			setLoading(false)
+			toaster.warning("kindly enter full name")
+			return
+		}
+		if(!phone) {
+			setLoading(false)
+			toaster.warning("kindly enter phone number")
+			return
+		}
+		if(!password) {
+			setLoading(false)
+			toaster.warning("kindly choose a password")
+			return 
+		}
+		Post('/users/create', {
+			email,
+			name,
+			contact: phone,
+			password,
+			role: 'VENDOR'
+		})
+		.then(({data})=>{
+			setLoading(false)
+			if(!data.success){
+				toaster.warning(data.message);
+			}
+			else {
+				toaster.success(data.message);
+				setUser(data.payload.user);
+			}
+		})
+		.catch((err)=>{
+			setLoading(false)
+			toaster.danger(err.message)
+		})
 	}
- 
+
+	useEffect(()=>{
+		removeUser();
+		removeToken();
+	}, [])
+
     return(
 		<>
 			<div className="accountbg"></div>
@@ -32,14 +82,14 @@ const Register = () => {
 							<h4 className="font-18 m-b-5 text-center">Register</h4>
 							<p className="text-muted text-center">Get your free Inkognito account now.</p>
 
-							<form className="form-horizontal m-t-30">
+							<div className="form-horizontal m-t-30">
 
 								<div className="form-group">
 									<label for="useremail">Email</label>
 									<input
 										type="email"
 										className="form-control"
-										id="useremail"
+										id="email"
 										placeholder="Enter email"
 										onChange={(e)=>setEmail(e.target.value)}
 									/>
@@ -89,7 +139,7 @@ const Register = () => {
 										<p className="font-14 text-muted mb-0">By registering you agree to the Inkognito <Link to="#">Terms of Use</Link></p>
 									</div>
 								</div>
-							</form>
+							</div>
 						</div>
 
 					</div>

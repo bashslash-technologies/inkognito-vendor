@@ -1,7 +1,7 @@
 import axios from "axios";
 
 //set base url
-axios.defaults.baseURL = "https://inkognito-server.herokuapp.com/the/v1/vendor";
+axios.defaults.baseURL = `${process.env.REACT_APP_BASE_URL}/api/v1`;
 
 export const Post = (url, options = {}) =>
 	new Promise((resolve, reject) => {

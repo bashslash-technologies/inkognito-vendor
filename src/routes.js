@@ -14,6 +14,7 @@ import Login from "./views/auth/Login";
 import Register from "./views/auth/Register";
 import Forgot from "./views/auth/Forgot";
 import Setup from "./views/auth/Setup";
+import Verify from "./views/auth/Verify";
 
 export default [
 	{
@@ -82,8 +83,8 @@ export default [
 		layout: '/auth'
 	},
 	{
-		path: "verify-mail",
-		component: ProductsDetail,
+		path: "verify-phone",
+		component: Verify,
 		layout: '/auth'
 	},
 	{

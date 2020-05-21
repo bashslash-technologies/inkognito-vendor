@@ -1,5 +1,11 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
+import { toaster } from "evergreen-ui";
+import { Post } from "../../util/transport";
+import {
+	setToken, setUser,
+	removeToken, removeUser
+} from "../../util/storage";
 
 const  Login = () => {
 
@@ -9,9 +15,41 @@ const  Login = () => {
 
 	const handleSubmit = () => {
 		setLoading(true)
-		alert("submitted")
-		setLoading(false)
+		if(!username) {
+			setLoading(false)
+			toaster.warning("kindly enter username")
+			return
+		}
+		if(!password) {
+			setLoading(false)
+			toaster.warning("kindly enter your password")
+			return 
+		}
+		Post('/users/login', {
+			username,
+			password,
+		})
+		.then(({data})=>{
+			setLoading(false)
+			if(!data.success){
+				toaster.warning(data.message);
+			}
+			else {
+				toaster.success(data.message);
+				setUser(data.payload.user);
+				setToken(data.payload.token);
+			}
+		})
+		.catch((err)=>{
+			setLoading(false)
+			toaster.danger(err.message)
+		})
 	}
+
+	useEffect(()=>{
+		removeUser();
+		removeToken();
+	}, [])
 
 	return (
 		<>
@@ -31,7 +69,7 @@ const  Login = () => {
 								Sign in to continue to InKognito.
 							</p>
 
-							<form className="form-horizontal m-t-30">
+							<div className="form-horizontal m-t-30">
 								<div className="form-group">
 									<label for="username">Username</label>
 									<input
@@ -73,7 +111,6 @@ const  Login = () => {
 									<div className="col-sm-6 text-right">
 										<button
 											className="btn btn-primary w-md waves-effect waves-light"
-											type="submit"
 											onClick={handleSubmit}
 										>
 											Log In
@@ -88,7 +125,7 @@ const  Login = () => {
 										</Link>
 									</div>
 								</div>
-							</form>
+							</div>
 						</div>
 					</div>
 				</div>
