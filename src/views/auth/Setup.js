@@ -4,29 +4,15 @@ import {toaster} from "evergreen-ui";
 import { Post } from "../../util/transport";
 
 const Setup = () => {
+    const {push} = useHistory()
     const [page, setPage] = useState(0);
-    const {push, location} = useHistory();
     const [loading, setLoading] = useState(false);
-    const [name, setName] =useState("");
 	const [business_name, setBusinessName] = useState("");
 	const [business_number, setBusinessNumber] = useState("");
 	const [business_certificate, setBusinessCertificate] = useState("");
 	const [owner_number, setOwnerNumber] = useState("");
 	const [owner_certificate, setOwnerCertificate] = useState("");
 	const [owner_type, setOwnerType] = useState("");
-
-	useEffect(()=>{
-		let token = location.state;
-		if(!token) {
-			push('/auth/login');
-			return toaster.warning("Error",{
-				description:"Your token expired, please login to continue"
-			})
-		}
-		console.log(token)
-		setName(location.state.state.data.user.email)
-	},[])
-
 
 	const handleNext = () => {
         setPage(page === 3 ? 3 : page+1)
@@ -55,8 +41,17 @@ const Setup = () => {
         data.append('identification_certificate', owner_certificate);
         Post("/users/setup", data)
         .then(({data})=>{
-            console.log(data)
             setLoading(false);
+            if(data.success){
+                push("/")
+                toaster.warning("Hurray",{
+                    description:data.message
+                })
+            }else{
+                toaster.warning("Error",{
+                    description:data.message
+                })
+            }
         })
         .catch((err)=>{
             console.log(err);
@@ -131,11 +126,11 @@ const Setup = () => {
                                     <div className="form-group">
                                         <label for="userpassword">Business Certificate</label>
                                         <input
-                                            type="text"
+                                            type="file"
                                             className="form-control"
                                             id="userpassword"
                                             placeholder="Enter text"
-                                            onChange={(e)=>setBusinessCertificate(e.target.value)}
+                                            onChange={(e)=>setBusinessCertificate(e.target.files[0])}
                                         />
                                     </div>
 
@@ -190,11 +185,11 @@ const Setup = () => {
                                     <div className="form-group">
                                         <label for="userpassword">Image of ID Card</label>
                                         <input
-                                            type="text"
+                                            type="file"
                                             className="form-control"
                                             id="userpassword"
                                             placeholder="Enter text"
-                                            onChange={(e)=>setOwnerCertificate(e.target.value)}
+                                            onChange={(e)=>setOwnerCertificate(e.target.files[0])}
                                         />
                                     </div>
                                     <div className="form-group row m-t-20">
@@ -295,7 +290,7 @@ const Setup = () => {
                                                 type="submit"
                                                 onClick={handleSubmit}
                                             >
-                                                Done
+                                                {loading ? 'Submitting...' : 'Done'}
                                             </button>
                                         </div>
                                     </div>

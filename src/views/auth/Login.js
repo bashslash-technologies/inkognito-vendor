@@ -47,13 +47,18 @@ const  Login = () => {
 					toaster.success("Please verify your account");
 					return;
 				}
-				if(!data.payload.user.documents.identification.verified){
+				if(!data.payload.user.business_name){
 					push('/auth/setup',{
 						state:{
 							data:data.payload
 						}
 					})
 					toaster.success("Please setup your account");
+					return;
+				}
+
+				if(!data.payload.user.documents.identification.verified || !data.payload.user.documents.licence.verified ){
+					toaster.warning("Your account is under review");
 					return;
 				}
 				toaster.success(data.message);
