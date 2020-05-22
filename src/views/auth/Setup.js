@@ -46,20 +46,20 @@ const Setup = () => {
             return;
         }
         setLoading(true);
-        const Form = new FormData();
-        Form.append('licence.number', business_number);
-        Form.append('licence.certificate', business_certificate);
-        Form.append('business_name', business_name);
-        Form.append('identification.type', owner_type)
-        Form.append('identification.number', owner_number);
-        Form.append('identification.certificate', owner_certificate);
-        Post("/users/setup", Form)
+        const data = new FormData();
+        data.append('licence_number', business_number);
+        data.append('licence_certificate', business_certificate);
+        data.append('business_name', business_name);
+        data.append('identification_type', owner_type)
+        data.append('identification_number', owner_number);
+        data.append('identification_certificate', owner_certificate);
+        Post("/users/setup", data)
         .then(({data})=>{
             console.log(data)
             setLoading(false);
         })
         .catch((err)=>{
-            console.log(err)
+            console.log(err);
             setLoading(false);
         })
     }

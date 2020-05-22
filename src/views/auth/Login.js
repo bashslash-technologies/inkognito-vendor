@@ -36,6 +36,8 @@ const  Login = () => {
 			}
 			else {
 				console.log(data.payload.user.util)
+				setUser(data.payload.user);
+				setToken(data.payload.token);
 				if(data.payload.user.util){
 					push('/auth/verify-phone',{
 						state:{
