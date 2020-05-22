@@ -1,11 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import { Link,useHistory } from 'react-router-dom';
 import {toaster} from "evergreen-ui";
+import { Post } from "../../util/transport";
 
 const Setup = () => {
     const [page, setPage] = useState(0);
-	const {push, location} = useHistory();
-	const [username,setName] = useState("")
+    const {push, location} = useHistory();
+    const [loading, setLoading] = useState(false);
+    const [name, setName] =useState("");
+	const [business_name, setBusinessName] = useState("");
+	const [business_number, setBusinessNumber] = useState("");
+	const [business_certificate, setBusinessCertificate] = useState("");
+	const [owner_number, setOwnerNumber] = useState("");
+	const [owner_certificate, setOwnerCertificate] = useState("");
+	const [owner_type, setOwnerType] = useState("");
 
 	useEffect(()=>{
 		let token = location.state;
@@ -27,7 +35,33 @@ const Setup = () => {
         setPage(page === 0 ? 0 : page-1)
     }
     const handleSubmit = () => {
-        alert('submitted')
+        if(!(business_name && business_number && business_certificate)) {
+            toaster.warning("please fill in details")
+            setPage(1)
+            return;
+        }
+        if(!(owner_certificate && owner_number && owner_type)) {
+            toaster.warning("please fill in details")
+            setPage(2)
+            return;
+        }
+        setLoading(true);
+        const Form = new FormData();
+        Form.append('licence.number', business_number);
+        Form.append('licence.certificate', business_certificate);
+        Form.append('business_name', business_name);
+        Form.append('identification.type', owner_type)
+        Form.append('identification.number', owner_number);
+        Form.append('identification.certificate', owner_certificate);
+        Post("/users/setup", Form)
+        .then(({data})=>{
+            console.log(data)
+            setLoading(false);
+        })
+        .catch((err)=>{
+            console.log(err)
+            setLoading(false);
+        })
     }
 
 
@@ -73,7 +107,7 @@ const Setup = () => {
                                 <p className="text-muted text-center">
                                     This is to verify if the business is actually registered
                                 </p>
-                                <form className="form-horizontal m-t-30">
+                                <div className="form-horizontal m-t-30">
                                     <div className="form-group">
                                         <label for="username">Business Name</label>
                                         <input
@@ -81,6 +115,7 @@ const Setup = () => {
                                             className="form-control"
                                             id="username"
                                             placeholder="Enter name of business"
+                                            onChange={(e)=>setBusinessName(e.target.value)}
                                         />
                                     </div>
                                     <div className="form-group">
@@ -90,15 +125,17 @@ const Setup = () => {
                                             className="form-control"
                                             id="username"
                                             placeholder="Enter username"
+                                            onChange={(e)=>setBusinessNumber(e.target.value)}
                                         />
                                     </div>
                                     <div className="form-group">
                                         <label for="userpassword">Business Certificate</label>
                                         <input
-                                            type="password"
+                                            type="text"
                                             className="form-control"
                                             id="userpassword"
-                                            placeholder="Enter password"
+                                            placeholder="Enter text"
+                                            onChange={(e)=>setBusinessCertificate(e.target.value)}
                                         />
                                     </div>
 
@@ -121,7 +158,7 @@ const Setup = () => {
                                             </button>
                                         </div>
                                     </div>
-                                </form>
+                                </div>
                             </>}
 
 							{page === 2 &&
@@ -129,32 +166,35 @@ const Setup = () => {
                                 <h4 className="font-18 m-b-5 text-center">Owner Details</h4>
                                 <p className="text-muted text-center">
                                 </p>
-                                <form className="form-horizontal m-t-30">
+                                <div className="form-horizontal m-t-30">
                                     <div className="form-group">
                                         <label for="userpassword">ID Type</label>
                                         <input
-                                            type="password"
+                                            type="text"
                                             className="form-control"
                                             id="userpassword"
-                                            placeholder="Enter password"
+                                            placeholder="Enter text"
+                                            onChange={(e)=>setOwnerType(e.target.value)}
                                         />
                                     </div>
                                     <div className="form-group">
                                         <label for="userpassword">ID Number</label>
                                         <input
-                                            type="password"
+                                            type="text"
                                             className="form-control"
                                             id="userpassword"
-                                            placeholder="Enter password"
+                                            placeholder="Enter text"
+                                            onChange={(e)=>setOwnerNumber(e.target.value)}
                                         />
                                     </div>
                                     <div className="form-group">
                                         <label for="userpassword">Image of ID Card</label>
                                         <input
-                                            type="password"
+                                            type="text"
                                             className="form-control"
                                             id="userpassword"
-                                            placeholder="Enter password"
+                                            placeholder="Enter text"
+                                            onChange={(e)=>setOwnerCertificate(e.target.value)}
                                         />
                                     </div>
                                     <div className="form-group row m-t-20">
@@ -175,7 +215,7 @@ const Setup = () => {
                                             </button>
                                         </div>
                                     </div>
-                                </form>
+                                </div>
                             </>}
 
 							{page === 3 &&
@@ -184,14 +224,14 @@ const Setup = () => {
                                 <p className="text-muted text-center">
                                     Kindly review to see if details are correct.
                                 </p>
-                                <form className="form-horizontal m-t-30">
+                                <div className="form-horizontal m-t-30">
                                     <div className="form-group">
                                         <label for="username">Business Name</label>
                                         <input
                                             type="text"
                                             className="form-control"
-                                            id="username"
-                                            placeholder="Enter name of business"
+                                            value={business_name}
+                                            disabled
                                         />
                                     </div>
                                     <div className="form-group">
@@ -199,44 +239,44 @@ const Setup = () => {
                                         <input
                                             type="text"
                                             className="form-control"
-                                            id="username"
-                                            placeholder="Enter username"
+                                            value={business_number}
+                                            disabled
                                         />
                                     </div>
                                     <div className="form-group">
                                         <label for="userpassword">Business Certificate</label>
                                         <input
-                                            type="password"
+                                            type="text"
                                             className="form-control"
-                                            id="userpassword"
-                                            placeholder="Enter password"
+                                            value={business_certificate}
+                                            disabled
                                         />
                                     </div>
                                     <div className="form-group">
                                         <label for="userpassword">ID Type</label>
                                         <input
-                                            type="password"
+                                            type="text"
                                             className="form-control"
-                                            id="userpassword"
-                                            placeholder="Enter password"
+                                            value={owner_type}
+                                            disabled
                                         />
                                     </div>
                                     <div className="form-group">
                                         <label for="userpassword">ID Number</label>
                                         <input
-                                            type="password"
+                                            type="text"
                                             className="form-control"
-                                            id="userpassword"
-                                            placeholder="Enter password"
+                                            value={owner_number}
+                                            disabled
                                         />
                                     </div>
                                     <div className="form-group">
                                         <label for="userpassword">Image of ID Card</label>
                                         <input
-                                            type="password"
+                                            type="text"
                                             className="form-control"
-                                            id="userpassword"
-                                            placeholder="Enter password"
+                                            value={owner_certificate}
+                                            disabled
                                         />
                                     </div>
 
@@ -259,7 +299,7 @@ const Setup = () => {
                                             </button>
                                         </div>
                                     </div>
-                                </form>
+                                </div>
                             </>}
 						</div>
 					</div>
