@@ -35,7 +35,7 @@ const  Login = () => {
 				toaster.warning(data.message);
 			}
 			else {
-				console.log(data.payload.user.util)
+				console.log(data.payload.user)
 				setUser(data.payload.user);
 				setToken(data.payload.token);
 				if(data.payload.user.util){
@@ -47,7 +47,7 @@ const  Login = () => {
 					toaster.success("Please verify your account");
 					return;
 				}
-				if(!data.payload.user.business_name){
+				if(data.payload.user.business_name === null){
 					push('/auth/setup',{
 						state:{
 							data:data.payload
@@ -80,13 +80,13 @@ const  Login = () => {
 
 	return (
 		<>
-			<div className="accountbg"></div>
+			{/*<div className="accountbg"></div>*/}
 			<div className="wrapper-page">
 				<div className="card">
 					<div className="card-body">
 						<h3 className="text-center m-0">
 							<Link to="/" className="logo logo-admin">
-								<img src={require("../../assets/images/logo.png")} height="30" alt="logo" />
+								{/*<img src={require("../../assets/images/logo.png")} height="30" alt="logo" />*/}
 							</Link>
 						</h3>
 
@@ -159,17 +159,17 @@ const  Login = () => {
 				</div>
 
 				<div className="m-t-40 text-center">
-					<p className="text-white">
+					<p className="">
 						Don't have an account ?{" "}
 						<Link
 							to="register"
-							className="font-500 font-14 text-white font-secondary"
+							className="font-500 font-14 font-secondary"
 						>
 							{" "}
 							Signup Now{" "}
 						</Link>{" "}
 					</p>
-					<p className="text-white">
+					<p className="">
 						© {new Date().getFullYear()}{" "}
 						BackSlash Technologies
 					</p>

@@ -75,14 +75,14 @@ const Register = () => {
 
     return(
 		<>
-			<div className="accountbg"></div>
+			{/*<div className="accountbg"></div>*/}
 			<div className="wrapper-page">
 				<div className="card">
 					<div className="card-body">
 
 						<h3 className="text-center m-0">
 							<Link to="/" className="logo logo-admin">
-								<img src={require("../../assets/images/logo.png")} height="30" alt="logo" />
+								{/*<img src={require("../../assets/images/logo.png")} height="30" alt="logo" />*/}
 							</Link>
 						</h3>
 
@@ -154,8 +154,8 @@ const Register = () => {
 				</div>
 
 				<div className="m-t-40 text-center">
-					<p className="text-white">Already have an account ? <Link to="login" className="font-500 font-14 text-white font-secondary"> Login </Link> </p>
-					<p className="text-white">©  {new Date().getFullYear()} BackSlash Technologies</p>
+					<p className="">Already have an account ? <Link to="login" className="font-500 font-14 font-secondary"> Login </Link> </p>
+					<p className="">©  {new Date().getFullYear()} BackSlash Technologies</p>
 				</div>
 
 			</div>

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { Link,useHistory } from 'react-router-dom';
 import {toaster} from "evergreen-ui";
 import { Post } from "../../util/transport";
+import {removeToken, removeUser} from "../../util/storage";
 
 const Setup = () => {
     const {push} = useHistory()
@@ -43,9 +44,11 @@ const Setup = () => {
         .then(({data})=>{
             setLoading(false);
             if(data.success){
-                push("/")
+                removeUser();
+                removeToken();
+                push("/auth/login")
                 toaster.warning("Hurray",{
-                    description:data.message
+                    description:"Your account is under review now"
                 })
             }else{
                 toaster.warning("Error",{

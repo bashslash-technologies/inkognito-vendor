@@ -2,6 +2,7 @@ import React, {useState,useEffect} from 'react';
 import {Link, useHistory} from 'react-router-dom';
 import {toaster} from "evergreen-ui";
 import {Post, Get} from "../../util/transport";
+import {setToken, setUser} from "../../util/storage";
 
 const Verify = () => {
     const {push, location} = useHistory();
@@ -42,6 +43,8 @@ const Verify = () => {
                 if (!data.success) {
                     toaster.warning(data.message);
                 } else {
+                    setUser(data.payload.user);
+                    setToken(data.payload.token);
                     push('/auth/setup', {
                         state: {
                             data: data.payload
@@ -78,7 +81,6 @@ const Verify = () => {
 
     return (
         <>
-            <div className="accountbg"></div>
             <div className="wrapper-page">
 
                 <div className="card">
@@ -86,7 +88,6 @@ const Verify = () => {
 
                         <h3 className="text-center m-0">
                             <Link to="/" onClick={() => this.props.UpdateLoginAgain()} className="logo logo-admin">
-                                <img src={require("../../assets/images/logo.png")} height="30" alt="logo"/>
                             </Link>
                         </h3>
 
@@ -135,7 +136,7 @@ const Verify = () => {
                 </div>
 
                 <div className="m-t-40 text-center">
-                    <p className="text-white">© {new Date().getFullYear()} BackSlash Technologies</p>
+                    <p className="">© {new Date().getFullYear()} BackSlash Technologies</p>
                 </div>
             </div>
         </>

@@ -30,7 +30,6 @@ const Forgot = () => {
     }
     return (
         <>
-            <div className="accountbg"></div>
             <div className="wrapper-page">
 
                 <div className="card">
@@ -38,12 +37,11 @@ const Forgot = () => {
 
                         <h3 className="text-center m-0">
                             <Link to="/" onClick={() => this.props.UpdateLoginAgain()} className="logo logo-admin">
-                                <img src={require("../../assets/images/logo.png")} height="30" alt="logo"/>
                             </Link>
                         </h3>
 
                         <div className="p-3">
-                            <h4 className="font-18 m-b-5 text-center">Reset Password</h4>
+                            <h4 className="font-18 m-b-5 text-center">Forgot Password?</h4>
                             <p className="text-muted text-center">Enter your Email and instructions will be sent to
                                 you!</p>
 
@@ -77,10 +75,10 @@ const Forgot = () => {
                 </div>
 
                 <div className="m-t-40 text-center">
-                    <p className="text-white">Remember It ? <Link to="login"
-                                                                  className="font-500 font-14 text-white font-secondary"> Sign
+                    <p className="">Remembered It ? <Link to="login"
+                                                                  className="font-500 font-14 font-secondary"> Sign
                         In Here </Link></p>
-                    <p className="text-white">© {new Date().getFullYear()} BackSlash Technologies</p>
+                    <p className="">© {new Date().getFullYear()} BackSlash Technologies</p>
                 </div>
             </div>
         </>

@@ -1,21 +1,34 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect,Fragment} from 'react';
 import { Link } from 'react-router-dom';
 import {
     SideSheet, Position,
     Pane, TextInputField,
     TagInput, Heading,
     Label, toaster,
-    Textarea, SelectMenu,
+    Textarea, SelectMenu,Spinner,SelectField
 } from 'evergreen-ui';
 import { times } from 'lodash';
 import { Get, Post } from '../../../util/transport';
 import Dropzone from 'react-dropzone';
 import { Row, Col, Card } from 'reactstrap';
+import Select from 'react-select'
+import moment from "moment";
+
+
+const getOptions = (data,setCat) =>{
+	let newData = [];
+	data.map((cat, i)=>newData.push({
+		value:cat.name,
+		label:cat.name
+	}))
+	setCat(newData)
+}
 
 const ProductsList = () => {
 
     const [addProductVisible, setAddProductVisible] = useState(false)
     const [loading, setLoading] = useState(false);
+    const [loadAdd, setLoadingAdd] = useState(false);
     const [categories, setCategories] = useState([]);
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
@@ -24,6 +37,7 @@ const ProductsList = () => {
 	const [name, setName] = useState('');
 	const [description, setDescription] = useState('');
 	const [tags, setTags] = useState([]);
+	const [stock, setStock] = useState("");
 	const [price, setPrice] = useState('');
     const [placeholder, setPlaceholder] = useState(null);
     const [selectedImages, setSelectedImages] = useState([]);
@@ -40,52 +54,55 @@ const ProductsList = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		setLoading(true);
-		if (!images) {
+		setLoadingAdd(true);
+		if (selectedImages.length === 0) {
 			toaster.warning("Please provide product image");
-			setLoading(false);
+			setLoadingAdd(false);
 			return;
 		}
 		if (!name) {
 			toaster.warning("Please provide product name");
-			setLoading(false);
+			setLoadingAdd(false);
 			return;
 		}
 		if (!price) {
 			toaster.warning("Please provide product price");
-			setLoading(false);
+			setLoadingAdd(false);
 			return;
 		}
 		if (!description) {
 			toaster.warning("Please provide product description");
-			setLoading(false);
+			setLoadingAdd(false);
 			return;
 		}
 		const data = new FormData();
-		for (let i = 0; i < (images.length < 5 ? images.length : 5); i++) {
-			data.append("files", images[i], images[i].name);
+		for (let i = 0; i < (selectedImages.length < 5 ? selectedImages.length : 5); i++) {
+			data.append("files", selectedImages[i], selectedImages[i].name);
 		}
 		data.append("name", name);
 		data.append("description", description);
 		data.append("price", price);
-		data.append("tags", tags);
+		data.append("categories", tags);
+		data.append("stock", stock);
 		Post("/products", data)
 			.then(({data}) => {
 				setImages(null);
 				setPlaceholder(null);
-				if (data.message) {
+				if (!data.success) {
 					toaster.warning(data.message)
 				} else {
-					setProducts(products.concat(data.payload))
-					setFilteredProducts(products.concat(data.payload))
+					setProducts([
+						...products,
+						data.payload
+					]);
 					toaster.success("product added successfully")
 				}
-				setLoading(false);
+				setLoadingAdd(false);
 				setAddProductVisible(false);
 			})
 			.catch((err) => {
 				toaster.danger(err.message);
-				setLoading(false);
+				setLoadingAdd(false);
 			});
 	};
 
@@ -99,9 +116,9 @@ const ProductsList = () => {
 
 	const fetchProducts = () => {
 		setLoading(true)
-		Get('/products')
+		Get('/products/all')
 			.then(({data})=>{
-				if (data.message) {
+				if (!data.success) {
 					toaster.warning(data.message)
 				} else {
 					setProducts(data.payload);
@@ -117,12 +134,12 @@ const ProductsList = () => {
 
 	const fetchCategories = () => {
 		setLoading(true)
-		Get('/products/categories')
+		Get('/categories')
 			.then(({data})=>{
-				if (data.message) {
+				if (!data.success) {
 					toaster.warning(data.message)
 				} else {
-					setCategories(data.payload);
+					getOptions(data.payload, setCategories)
 				}
 				setLoading(false)
 			})
@@ -131,16 +148,16 @@ const ProductsList = () => {
 				setLoading(false)
 			})
     }
-    
+
     const handleAcceptedFiles = (files) => {
         files.map(file => Object.assign(file, {
             preview: URL.createObjectURL(file),
             formattedSize: formatBytes(file.size)
         }));
-        
+
         setSelectedImages(files)
     }
-        
+
         /**
         * Formats the size
         */
@@ -149,7 +166,7 @@ const ProductsList = () => {
         const k = 1024;
         const dm = decimals < 0 ? 0 : decimals;
         const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-        
+
         const i = Math.floor(Math.log(bytes) / Math.log(k));
         return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
     }
@@ -158,6 +175,7 @@ const ProductsList = () => {
 		fetchProducts()
 		fetchCategories()
 	}, [])
+
 
     return (
         <div className="container-fluid">
@@ -173,46 +191,67 @@ const ProductsList = () => {
                 </div>
             </div>
 
-            <div className="row">
-                <div className="col-12">
-                    <div className="card m-b-20">
-                        <div className="card-body m-0 p-0">
 
-                            
+			{
+				loading ? (<div style={{display:'flex',justifyContent:'center',alignItems:'center',height:'70vh', width:'70vw'}}>
+					<Spinner />
+				</div>):(<Fragment>
+						{
+							products.length === 0 ? (<div style={{display:'flex',justifyContent:'center',alignItems:'center',height:'70vh', width:'70vw'}}>
+								No products here ...
+							</div>):(
+								<div className="row">
+									<div className="col-12">
+										<div className="card m-b-20">
+											<div className="card-body m-0 p-0">
 
-                            <table id="datatable" className="table table-striped dt-responsive nowrap table-vertical" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>Image</th>
-                                        <th>Product Name</th>
-                                        <th>Added Date</th>
-                                        <th>Price</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {times(10, () => (<tr>
-                                        <td className="product-list-img">
-                                            <img src="assets/images/products/1.jpg" className="img-fluid" alt="tbl" />
-                                        </td>
-                                        <td>
-                                            <h6 className="mt-0 m-b-5">Riverston Glass Chair</h6>
-                                            <p className="m-0 font-14">Lorem ipsum dolor sit consec te imperdiet iaculis ipsum..</p>
-                                        </td>
-                                        <td>22/05/2017</td>
-                                        <td>$521</td>
-                                        <td>
-                                            <Link to="/admin/products/:product_id" className="m-r-15 text-muted"> <i className="mdi mdi-pencil font-18"></i></Link>
-                                            <Link to="#" className="text-muted" ><i className="mdi mdi-close font-18"></i></Link>
-                                        </td>
-                                    </tr>))}                                    
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
+
+												<table id="datatable"
+													   className="table table-striped dt-responsive nowrap table-vertical"
+													   width="100%" cellSpacing="0">
+													<thead>
+													<tr>
+														<th>Image</th>
+														<th>Product Name</th>
+														<th>Added Date</th>
+														<th>Price</th>
+														<th>Action</th>
+													</tr>
+													</thead>
+													<tbody>
+													{
+														products.map((pro,i) => (
+															<Fragment key={i}>
+																    <tr>
+																		<td className="product-list-img">
+																			<img src={pro.images[0]} className="img-fluid" alt="tbl" />
+																		</td>
+																		<td>
+																			<h6 className="mt-0 m-b-5">{pro.name}</h6>
+																			<p className="m-0 font-14">{pro.description.length >= 50 ? `${pro.description.slice(0,50)}...` :  pro.description}</p>
+																		</td>
+																		<td>{moment(pro.createdAt).format("Do MMMM YYYY hh:mm a")}</td>
+																		<td>&cent; {pro.price}</td>
+																		<td>
+																			<Link to="/admin/products/:product_id" className="m-r-15 text-muted"> <i className="mdi mdi-pencil font-18"></i></Link>
+																			<Link to="#" className="text-muted" ><i className="mdi mdi-close font-18"></i></Link>
+																		</td>
+																	</tr>
+															</Fragment>
+														))
+													}
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							)
+						}
+				</Fragment>)
+			}
+
+
             <SideSheet
                 isShown={addProductVisible}
                 onCloseComplete={()=>setAddProductVisible(false)}
@@ -277,7 +316,7 @@ const ProductsList = () => {
                             inputWidth={400}
                             placeholder="eg. Iphone 11"
                             marginBottom={20}
-                            onChange={(e)=>setName(e.target.value)}	
+                            onChange={(e)=>setName(e.target.value)}
                         />
                         <TextInputField
                             label="Price"
@@ -287,9 +326,37 @@ const ProductsList = () => {
                             inputWidth={400}
                             placeholder="eg. 99.99"
                             marginBottom={20}
-                            onChange={(e)=>setPrice(e.target.value)}	
+                            onChange={(e)=>setPrice(e.target.value)}
+                        /><TextInputField
+                            label="Stock"
+                            inputHeight={40}
+                            type="number"
+                            min={0}
+                            inputWidth={400}
+                            placeholder="eg. 5"
+                            marginBottom={20}
+                            onChange={(e)=>setStock(e.target.value)}
                         />
                         <div
+                            style={{ flexDirection: 'column', display: 'flex',marginBottom:10 }}
+                        >
+                            <Label
+                                htmlFor="description"
+                                marginBottom={4}
+                            >
+                                Categories
+                            </Label>
+							<Select options={categories} isMulti onChange={(e)=>{
+								if(e){
+									let newData = [];
+									newData = e.map(data => data.value)
+									setTags(newData)
+									return
+								}
+								setTags([])
+
+							}} />
+                        </div><div
                             style={{ flexDirection: 'column', display: 'flex', }}
                         >
                             <Label
@@ -301,6 +368,7 @@ const ProductsList = () => {
                             <Textarea
                                 id="description"
                                 width={400}
+								required
                                 placeholder="eg. A smart phone"
                                 marginBottom={20}
                                 grammarly={true}
@@ -308,11 +376,11 @@ const ProductsList = () => {
                             />
                         </div>
                     </div>
-                    <button disabled={loading} onClick={handleSubmit} className="btn btn-primary" style={{ alignSelf: 'center', display: 'flex', width: 400, justifyContent: 'center', }} >{loading ? "Adding Product":"Add Product"}</button>
+                    <button disabled={loadAdd} onClick={handleSubmit} className="btn btn-primary" style={{ alignSelf: 'center', display: 'flex', width: 400, justifyContent: 'center', }} >{loadAdd ? "Adding Product":"Add Product"}</button>
                 </Pane>
             </SideSheet>
-        </div> 
+        </div>
     );
 }
 
-export default ProductsList;   
+export default ProductsList;

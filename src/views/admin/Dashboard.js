@@ -5,13 +5,13 @@ class dashboard1 extends Component{
 
     constructor(props) {
         super(props);
-     
+
         this.state = {
           simple:80, simple68:68, simple37:37, simple72:72,
         };
       }
 
- 
+
 render(){
     return(
         <div className="container-fluid">
@@ -76,150 +76,150 @@ render(){
                         </div>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="col-xl-3">
-                        <div className="card m-b-20">
-                            <div className="card-body">
-                                <h4 className="mt-0 header-title m-b-30">Recent Stock</h4>
+                {/*<div className="row">*/}
+                {/*    <div className="col-xl-3">*/}
+                {/*        <div className="card m-b-20">*/}
+                {/*            <div className="card-body">*/}
+                {/*                <h4 className="mt-0 header-title m-b-30">Recent Stock</h4>*/}
 
-                                <div className="text-center">
-                                     
-                                    <PieChart
-                                        label
-                                        size={100}
-                                        innerHoleSize={80}
-                                        data={[
-                                        { key: 'A', value: 80, color: '#ffbb44' },
-                                        { key: 'B', value: 20, color: '#fff' },
-                                        ]}
-                                    />
+                {/*                <div className="text-center">*/}
+                {/*                     */}
+                {/*                    <PieChart*/}
+                {/*                        label*/}
+                {/*                        size={100}*/}
+                {/*                        innerHoleSize={80}*/}
+                {/*                        data={[*/}
+                {/*                        { key: 'A', value: 80, color: '#ffbb44' },*/}
+                {/*                        { key: 'B', value: 20, color: '#fff' },*/}
+                {/*                        ]}*/}
+                {/*                    />*/}
 
-                                    <div className="clearfix"></div>
-                                    <a href="/#" className="btn btn-sm btn-warning m-t-20">View All Data</a>
-                                    <ul className="list-inline row m-t-30 clearfix">
-                                        <li className="col-6">
-                                            <p className="m-b-5 font-18 font-600">7,541</p>
-                                            <p className="mb-0">Mobile Phones</p>
-                                        </li>
-                                        <li className="col-6">
-                                            <p className="m-b-5 font-18 font-600">125</p>
-                                            <p className="mb-0">Desktops</p>
-                                        </li>
-                                    </ul>
+                {/*                    <div className="clearfix"></div>*/}
+                {/*                    <a href="/#" className="btn btn-sm btn-warning m-t-20">View All Data</a>*/}
+                {/*                    <ul className="list-inline row m-t-30 clearfix">*/}
+                {/*                        <li className="col-6">*/}
+                {/*                            <p className="m-b-5 font-18 font-600">7,541</p>*/}
+                {/*                            <p className="mb-0">Mobile Phones</p>*/}
+                {/*                        </li>*/}
+                {/*                        <li className="col-6">*/}
+                {/*                            <p className="m-b-5 font-18 font-600">125</p>*/}
+                {/*                            <p className="mb-0">Desktops</p>*/}
+                {/*                        </li>*/}
+                {/*                    </ul>*/}
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                {/*                </div>*/}
+                {/*            </div>*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
+                //
+                {/*    <div className="col-xl-3">*/}
+                {/*         <div className="card m-b-20">*/}
+                {/*             <div className="card-body">*/}
+                {/*                <h4 className="mt-0 header-title m-b-30">Purchase Order</h4>*/}
 
-                    <div className="col-xl-3">
-                        <div className="card m-b-20">
-                            <div className="card-body">
-                                <h4 className="mt-0 header-title m-b-30">Purchase Order</h4>
+                {/*                <div className="text-center">*/}
+                {/*          */}
+                {/*                        <PieChart*/}
+                {/*                        label*/}
+                {/*                        size={100}*/}
+                {/*                        innerHoleSize={80}*/}
+                {/*                        data={[*/}
+                {/*                        { key: 'A', value: 68, color: '#4ac18e' },*/}
+                {/*                        { key: 'B', value: 25, color: '#fff' },*/}
+                {/*                        ]}*/}
+                {/*                    />*/}
 
-                                <div className="text-center">
-                          
-                                       <PieChart
-                                        label
-                                        size={100}
-                                        innerHoleSize={80}
-                                        data={[
-                                        { key: 'A', value: 68, color: '#4ac18e' },
-                                        { key: 'B', value: 25, color: '#fff' },
-                                        ]}
-                                    />
+                {/*                    <div className="clearfix"></div>*/}
+                {/*                    <a href="/#" className="btn btn-sm btn-success m-t-20">View All Data</a>*/}
+                {/*                    <ul className="list-inline row m-t-30 clearfix">*/}
+                {/*                        <li className="col-6">*/}
+                {/*                            <p className="m-b-5 font-18 font-600">2,541</p>*/}
+                {/*                            <p className="mb-0">Mobile Phones</p>*/}
+                {/*                        </li>*/}
+                {/*                        <li className="col-6">*/}
+                {/*                            <p className="m-b-5 font-18 font-600">874</p>*/}
+                {/*                            <p className="mb-0">Desktops</p>*/}
+                {/*                        </li>*/}
+                {/*                    </ul>*/}
 
-                                    <div className="clearfix"></div>
-                                    <a href="/#" className="btn btn-sm btn-success m-t-20">View All Data</a>
-                                    <ul className="list-inline row m-t-30 clearfix">
-                                        <li className="col-6">
-                                            <p className="m-b-5 font-18 font-600">2,541</p>
-                                            <p className="mb-0">Mobile Phones</p>
-                                        </li>
-                                        <li className="col-6">
-                                            <p className="m-b-5 font-18 font-600">874</p>
-                                            <p className="mb-0">Desktops</p>
-                                        </li>
-                                    </ul>
+                {/*                </div>*/}
+                {/*            </div>*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                {/*    <div className="col-xl-3">*/}
+                {/*        <div className="card m-b-20">*/}
+                {/*            <div className="card-body">*/}
+                {/*                <h4 className="mt-0 header-title m-b-30">Shipped Orders</h4>*/}
 
-                    <div className="col-xl-3">
-                        <div className="card m-b-20">
-                            <div className="card-body">
-                                <h4 className="mt-0 header-title m-b-30">Shipped Orders</h4>
+                {/*//                 <div className="text-center">*/}
+                {/*//*/}
+                {/*                        */}
+                {/*                       <PieChart*/}
+                {/*                        label*/}
+                {/*                        size={100}*/}
+                {/*                        innerHoleSize={80}*/}
+                {/*                        data={[*/}
+                {/*                        { key: 'A', value: 69, color: '#8d6e63' },*/}
+                {/*                        { key: 'B', value: 30, color: '#fff' },*/}
+                {/*                        ]}*/}
+                {/*                    />*/}
 
-                                <div className="text-center">
-                          
-                                        
-                                       <PieChart
-                                        label
-                                        size={100}
-                                        innerHoleSize={80}
-                                        data={[
-                                        { key: 'A', value: 69, color: '#8d6e63' },
-                                        { key: 'B', value: 30, color: '#fff' },
-                                        ]}
-                                    />
+                {/*                    <div className="clearfix"></div>*/}
+                {/*                    <a href="/#" className="btn btn-sm btn-brown m-t-20">View All Data</a>*/}
+                {/*                    <ul className="list-inline row m-t-30 clearfix">*/}
+                {/*                        <li className="col-6">*/}
+                {/*                            <p className="m-b-5 font-18 font-600">1,154</p>*/}
+                {/*                            <p className="mb-0">Mobile Phones</p>*/}
+                {/*                        </li>*/}
+                {/*                        <li className="col-6">*/}
+                {/*                            <p className="m-b-5 font-18 font-600">89</p>*/}
+                {/*                            <p className="mb-0">Desktops</p>*/}
+                {/*                        </li>*/}
+                {/*                    </ul>*/}
 
-                                    <div className="clearfix"></div>
-                                    <a href="/#" className="btn btn-sm btn-brown m-t-20">View All Data</a>
-                                    <ul className="list-inline row m-t-30 clearfix">
-                                        <li className="col-6">
-                                            <p className="m-b-5 font-18 font-600">1,154</p>
-                                            <p className="mb-0">Mobile Phones</p>
-                                        </li>
-                                        <li className="col-6">
-                                            <p className="m-b-5 font-18 font-600">89</p>
-                                            <p className="mb-0">Desktops</p>
-                                        </li>
-                                    </ul>
+                                 {/*</div>*/}
+                             {/*</div>*/}
+                         {/*</div>*/}
+                {/*    </div>*/}
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                {/*    <div className="col-xl-3">*/}
+                {/*        <div className="card m-b-20">*/}
+                {/*            <div className="card-body">*/}
+                {/*                <h4 className="mt-0 header-title m-b-30">Cancelled Orders</h4>*/}
 
-                    <div className="col-xl-3">
-                        <div className="card m-b-20">
-                            <div className="card-body">
-                                <h4 className="mt-0 header-title m-b-30">Cancelled Orders</h4>
+                {/*                <div className="text-center">*/}
+                {/*         */}
+                {/*                        */}
+                {/*                       <PieChart*/}
+                {/*                        label*/}
+                {/*                        size={100}*/}
+                {/*                        innerHoleSize={80}*/}
+                {/*                         data={[*/}
+                {/*                         { key: 'A', value: 95, color: '#90a4ae' },*/}
+                {/*                         { key: 'B', value: 5, color: '#fff' },*/}
+                {/*                         ]}*/}
+                {/*                    />*/}
 
-                                <div className="text-center">
-                         
-                                        
-                                       <PieChart
-                                        label
-                                        size={100}
-                                        innerHoleSize={80}
-                                        data={[
-                                        { key: 'A', value: 95, color: '#90a4ae' },
-                                        { key: 'B', value: 5, color: '#fff' },
-                                        ]}
-                                    />
+                {/*                    <div className="clearfix"></div>*/}
+                {/*                    <a href="/#" className="btn btn-sm btn-blue-grey m-t-20">View All Data</a>*/}
+                {/*                    <ul className="list-inline row m-t-30 clearfix">*/}
+                {/*                         <li className="col-6">*/}
+                {/*<p className="m-b-5 font-18 font-600">95</p>*/}
+                {/*                             <p className="mb-0">Mobile Phones</p>*/}
+                {/*//                         </li>*/}
+                {/*                        <li className="col-6">*/}
+                {/*                            <p className="m-b-5 font-18 font-600">25</p>*/}
+                {/*                            <p className="mb-0">Desktops</p>*/}
+                {/*                        </li>*/}
+                {/*                    </ul>*/}
 
-                                    <div className="clearfix"></div>
-                                    <a href="/#" className="btn btn-sm btn-blue-grey m-t-20">View All Data</a>
-                                    <ul className="list-inline row m-t-30 clearfix">
-                                        <li className="col-6">
-                                            <p className="m-b-5 font-18 font-600">95</p>
-                                            <p className="mb-0">Mobile Phones</p>
-                                        </li>
-                                        <li className="col-6">
-                                            <p className="m-b-5 font-18 font-600">25</p>
-                                            <p className="mb-0">Desktops</p>
-                                        </li>
-                                    </ul>
+                {/*                </div>*/}
+                {/*            </div>*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+                {/*</div>*/}
 
                 <div className="row">
                     <div className="col-xl-6">
@@ -444,4 +444,4 @@ render(){
     }
 }
 
-export default dashboard1;   
+export default dashboard1;
