@@ -17,11 +17,17 @@ import Setup from "./views/auth/Setup";
 import Verify from "./views/auth/Verify";
 import VerifyForgot from "./views/auth/VerifyForgot";
 import NewPassword from "./views/auth/newPassword";
+import MyShops from "./views/auth/MyShops";
 
 export default [
 	{
 		path: "dashboard",
 		component: Dashboard,
+		layout: '/admin'
+	},
+	{
+		path: "setup",
+		component: Setup,
 		layout: '/admin'
 	},
 	{
@@ -111,6 +117,11 @@ export default [
 	{
 		path: "setup",
 		component: Setup,
+		layout: '/auth'
+	},
+	{
+		path: "shops",
+		component: MyShops,
 		layout: '/auth'
 	},
 ]

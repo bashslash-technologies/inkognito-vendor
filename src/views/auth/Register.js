@@ -38,10 +38,10 @@ const Register = () => {
 			toaster.warning("kindly choose a password")
 			return
 		}
-		Post('/users/create', {
+		Post('/users/register', {
 			email,
 			name,
-			contact: phone.slice(-9),
+			phone: phone.slice(-9),
 			password,
 			role: 'VENDOR'
 		})

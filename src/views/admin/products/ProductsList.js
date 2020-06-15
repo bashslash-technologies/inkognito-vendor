@@ -18,8 +18,8 @@ import moment from "moment";
 const getOptions = (data,setCat) =>{
 	let newData = [];
 	data.map((cat, i)=>newData.push({
-		value:cat.name,
-		label:cat.name
+		value: cat.name,
+		label: cat.name
 	}))
 	setCat(newData)
 }
@@ -139,7 +139,7 @@ const ProductsList = () => {
 				if (!data.success) {
 					toaster.warning(data.message)
 				} else {
-					getOptions(data.payload, setCategories)
+					getOptions(data.payload.categories, setCategories)
 				}
 				setLoading(false)
 			})
@@ -197,8 +197,8 @@ const ProductsList = () => {
 					<Spinner />
 				</div>):(<Fragment>
 						{
-							products.length === 0 ? (<div style={{display:'flex',justifyContent:'center',alignItems:'center',height:'70vh', width:'70vw'}}>
-								No products here ...
+							products.length === 0 ? (<div style={{display:'flex',justifyContent:'center',alignItems:'center',height:'70vh', width:'100%'}}>
+								<a onClick={()=>setAddProductVisible(true)}>Add Your First Product</a>
 							</div>):(
 								<div className="row">
 									<div className="col-12">

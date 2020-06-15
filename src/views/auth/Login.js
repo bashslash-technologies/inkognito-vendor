@@ -28,6 +28,7 @@ const  Login = () => {
 		Post('/users/login', {
 			username,
 			password,
+			role: "VENDOR"
 		})
 		.then(({data})=>{
 			setLoading(false)
