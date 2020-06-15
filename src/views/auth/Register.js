@@ -136,15 +136,23 @@ const Register = () => {
 									/>
 								</div>
 
-								<div className="form-group row m-t-20">
-									<div className="col-12 text-right">
+								<div className="form-group row m-t-20 align-items-center">
+									<div className="col-sm-6">
+										<Link
+											to="login"
+											className="font-500 font-14 font-secondary text-muted"
+										>
+											Login Instead
+										</Link>
+									</div>
+									<div className="col-sm-6 text-right">
 										<button onClick={handleSubmit} disabled={loading} className="btn btn-primary w-md waves-effect waves-light" type="submit">{loading ? "Registering..." : 'Register'}</button>
 									</div>
 								</div>
 
-								<div className="form-group m-t-10 mb-0 row">
+								<div className="form-group m-t-10 mb-0 text-center">
 									<div className="col-12 m-t-20">
-										<p className="font-14 text-muted mb-0">By registering you agree to the Inkognito <Link to="#">Terms of Use</Link></p>
+										<p className="font-14 text-muted mb-0">By registering you agree to the<br/>Inkognito <Link to="#">Terms of Use</Link></p>
 									</div>
 								</div>
 							</div>
@@ -154,7 +162,6 @@ const Register = () => {
 				</div>
 
 				<div className="m-t-40 text-center">
-					<p className="">Already have an account ? <Link to="login" className="font-500 font-14 font-secondary"> Login </Link> </p>
 					<p className="">©  {new Date().getFullYear()} BackSlash Technologies</p>
 				</div>
 

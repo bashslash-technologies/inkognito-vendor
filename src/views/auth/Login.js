@@ -48,20 +48,6 @@ const  Login = () => {
 					toaster.success("Please verify your account");
 					return;
 				}
-				if(data.payload.user.business_name === null){
-					push('/auth/setup',{
-						state:{
-							data:data.payload
-						}
-					})
-					toaster.success("Please setup your account");
-					return;
-				}
-
-				if(!data.payload.user.documents.identification.verified || !data.payload.user.documents.licence.verified ){
-					toaster.warning("Your account is under review");
-					return;
-				}
 				toaster.success(data.message);
 				setUser(data.payload.user);
 				setToken(data.payload.token);
@@ -120,21 +106,14 @@ const  Login = () => {
 									/>
 								</div>
 
-								<div className="form-group row m-t-20">
+								<div className="form-group row m-t-20 align-items-center">
 									<div className="col-sm-6">
-										<div className="custom-control custom-checkbox">
-											<input
-												type="checkbox"
-												className="custom-control-input"
-												id="customControlInline"
-											/>
-											<label
-												className="custom-control-label"
-												for="customControlInline"
-											>
-												Remember me
-											</label>
-										</div>
+										<Link
+											to="register"
+											className="font-500 font-14 font-secondary text-muted"
+										>
+											SignUp Now
+										</Link>
 									</div>
 									<div className="col-sm-6 text-right">
 										<button
@@ -147,8 +126,8 @@ const  Login = () => {
 									</div>
 								</div>
 
-								<div className="form-group m-t-10 mb-0 row">
-									<div className="col-12 m-t-20">
+								<div className="form-group mt-4 mb-0 text-center">
+									<div className="col-12 mt-4">
 										<Link to="forgot-password" className="text-muted">
 											<i className="mdi mdi-lock"></i> Forgot your password?
 										</Link>
@@ -160,16 +139,6 @@ const  Login = () => {
 				</div>
 
 				<div className="m-t-40 text-center">
-					<p className="">
-						Don't have an account ?{" "}
-						<Link
-							to="register"
-							className="font-500 font-14 font-secondary"
-						>
-							{" "}
-							Signup Now{" "}
-						</Link>{" "}
-					</p>
 					<p className="">
 						© {new Date().getFullYear()}{" "}
 						BackSlash Technologies

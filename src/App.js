@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import AuthLayout from "./layouts/AuthLayout";
 import AdminLayout from "./layouts/AdminLayout";
-import { getToken } from './util/storage';
+import { getToken, getShop } from './util/storage';
 
 const PrivateRoute = ({component:Component, ...rest}) => {
 
@@ -11,7 +11,9 @@ const PrivateRoute = ({component:Component, ...rest}) => {
 			{...rest}
 			component={(props)=>{
 				let token = getToken();
+				let shop = getShop();
 				if(!token) return <Redirect to="/auth" />
+				if(!shop) return <Redirect to="/auth/shops" />
 				return <Component {...props} />
 			}}
 		/>

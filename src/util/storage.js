@@ -30,11 +30,28 @@ function removeUser() {
 	return true;
 }
 
+function setShop(shop) {
+	localStorage.setItem("shop", JSON.stringify(shop));
+	return true;
+}
+
+function getShop() {
+	const shop = localStorage.getItem("shop");
+	return shop;
+}
+
+function removeShop() {
+	localStorage.removeItem("shop")
+}
+
 export {
 	setToken,
 	getToken,
 	removeToken,
 	setUser,
 	getUser,
-	removeUser
+	removeUser,
+	setShop,
+	getShop,
+	removeShop
 }
