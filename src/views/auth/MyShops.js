@@ -7,7 +7,7 @@ import { setShop } from '../../util/storage';
 
 const MyShops = () => {
 
-	const [shop_id, setShopID] = useState(0);
+	const [shop_id, setShopID] = useState(null);
 	const [shops, setShops] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const {push} = useHistory()
@@ -18,6 +18,9 @@ const MyShops = () => {
 		}
 		else{
 			setShop(shop_id)
+			push("/admin", {
+				shop_id: shop_id
+			})
 		}
 	}
 
@@ -29,8 +32,8 @@ const MyShops = () => {
 					toaster.warning(data.message);
 				}
 				else {
-					console.log(data.payload.user)
-					setShops(data.payload.shops)
+					console.log(data.payload.shops)
+					setShops(data.payload.shops);
 				}
 			})
 			.catch((err) => {
@@ -71,19 +74,19 @@ const MyShops = () => {
 								{shops.length > 0 ?
 									<>
 									 	<div className="row">
-											{times(3, (index)=>
+											{shops.map((shope, index)=>
 												<div className="col-12 my-1">
-													<div className={`card ${shop_id === index ?"border-primary border-3": ""}`} onClick={()=>setShopID(index)}>
+													<div className={`card ${shop_id === shope._id ?"border-primary border-3": ""}`} onClick={()=>setShopID(shope._id)}>
 														<div className="row m-0 p-0 align-items-center">
 															<img
-														  		src="https://upload.wikimedia.org/wikipedia/commons/a/a1/Alan_Turing_Aged_16.jpg"
-															 	alt="Alan Turing"
+														  		src={shope.logo ? shope.logo : "https://img.icons8.com/wired/64/000000/shop.png"}
+															 	alt="logo"
 															  	className="m-2 p-0"
 															  	width="45px"
 															  	height="45px"
-															  	style={{objectFit: "cover", borderRadius: "30px"}}
+															  	style={{objectFit: "cover", borderRadius: "10px"}}
 															/>
-															<h6 className="col text-truncate">Attia Donko Saloon sdkjskjf ksjfksjfkj ksjfkjskjf kjsjfjksfj ksffkjskf ksjfkjskjf</h6>
+															<h6 className="col text-truncate">{shope.name}</h6>
 														</div>
 													</div>
 												</div>

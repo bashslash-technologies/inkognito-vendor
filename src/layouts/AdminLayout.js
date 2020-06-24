@@ -8,7 +8,7 @@ import routes from '../routes';
 const getRoutes = routes => {
     return routes.map(function(route, key){
 		if(route.layout === "/admin") {
-			return <Route path={`/admin/${route.path}`} component={route.component} />
+			return <Route exact path={`/admin/${route.path}`} component={route.component} />
 		}
 		return null
 	})

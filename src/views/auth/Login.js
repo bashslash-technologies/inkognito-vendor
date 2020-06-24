@@ -4,7 +4,7 @@ import { toaster } from "evergreen-ui";
 import { Post } from "../../util/transport";
 import {
 	setToken, setUser,
-	removeToken, removeUser
+	removeToken, removeUser, removeShop
 } from "../../util/storage";
 
 const  Login = () => {
@@ -63,6 +63,7 @@ const  Login = () => {
 	useEffect(()=>{
 		removeUser();
 		removeToken();
+		removeShop();
 	}, [])
 
 	return (

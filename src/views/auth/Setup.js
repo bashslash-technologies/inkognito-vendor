@@ -40,7 +40,7 @@ const Setup = () => {
 		}
 		*/
 		let lingLat = {
-			longitude: 234,
+			longitude: 23,
 			latitude: 43
 		}
 		setLoading(true);
@@ -48,7 +48,8 @@ const Setup = () => {
 		data.append("certificate_number", business_number);
 		data.append("certificate", business_certificate, business_certificate.name);
 		data.append("name", business_name);
-		data.append("location", lingLat);
+		data.append("longitude", lingLat.longitude);
+		data.append("latitude", lingLat.latitude)
 		Post("/shops", data)
 		.then(({ data }) => {
 			setLoading(false);

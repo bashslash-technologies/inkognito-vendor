@@ -1,5 +1,5 @@
 import React, {useState, useEffect,Fragment} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import {
     SideSheet, Position,
     Pane, TextInputField,
@@ -13,6 +13,7 @@ import Dropzone from 'react-dropzone';
 import { Row, Col, Card } from 'reactstrap';
 import Select from 'react-select'
 import moment from "moment";
+import { getShop } from '../../../util/storage';
 
 
 const getOptions = (data,setCat) =>{
@@ -40,7 +41,9 @@ const ProductsList = () => {
 	const [stock, setStock] = useState("");
 	const [price, setPrice] = useState('');
     const [placeholder, setPlaceholder] = useState(null);
-    const [selectedImages, setSelectedImages] = useState([]);
+	const [selectedImages, setSelectedImages] = useState([]);
+	
+	const {sta} = useHistory()
 
 	const handleImageChange = (files) => {
 		if (files[0] !== undefined) {
@@ -76,10 +79,12 @@ const ProductsList = () => {
 			return;
 		}
 		const data = new FormData();
+		const shop_id = getShop()
 		for (let i = 0; i < (selectedImages.length < 5 ? selectedImages.length : 5); i++) {
 			data.append("files", selectedImages[i], selectedImages[i].name);
 		}
 		data.append("name", name);
+		data.append("shop_id", shop_id)
 		data.append("description", description);
 		data.append("price", price);
 		data.append("categories", tags);
@@ -93,7 +98,7 @@ const ProductsList = () => {
 				} else {
 					setProducts([
 						...products,
-						data.payload
+						data.payload.product
 					]);
 					toaster.success("product added successfully")
 				}
@@ -116,13 +121,14 @@ const ProductsList = () => {
 
 	const fetchProducts = () => {
 		setLoading(true)
-		Get('/products/all')
+		const shop_id = getShop()
+		Get(`/products/shop/${shop_id}`)
 			.then(({data})=>{
 				if (!data.success) {
 					toaster.warning(data.message)
 				} else {
-					setProducts(data.payload);
-					setFilteredProducts(data.payload);
+					setProducts(data.payload.products);
+					setFilteredProducts(data.payload.products);
 				}
 				setLoading(false)
 			})
@@ -233,7 +239,7 @@ const ProductsList = () => {
 																		<td>{moment(pro.createdAt).format("Do MMMM YYYY hh:mm a")}</td>
 																		<td>&cent; {pro.price}</td>
 																		<td>
-																			<Link to="/admin/products/:product_id" className="m-r-15 text-muted"> <i className="mdi mdi-pencil font-18"></i></Link>
+																			<Link to={`/admin/products/${pro._id}`} className="m-r-15 text-muted"> <i className="mdi mdi-pencil font-18"></i></Link>
 																			<Link to="#" className="text-muted" ><i className="mdi mdi-close font-18"></i></Link>
 																		</td>
 																	</tr>

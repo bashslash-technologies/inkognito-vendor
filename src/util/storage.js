@@ -31,7 +31,7 @@ function removeUser() {
 }
 
 function setShop(shop) {
-	localStorage.setItem("shop", JSON.stringify(shop));
+	localStorage.setItem("shop", shop);
 	return true;
 }
 
