@@ -1,5 +1,5 @@
-import React , {useState } from 'react';
-import { Link } from 'react-router-dom';
+import React , {useState,useEffect } from 'react';
+import { Link,useHistory,useLocation } from 'react-router-dom';
 import { toaster } from "evergreen-ui";
 import { Post, Get } from "../../util/transport";
 import {
@@ -7,10 +7,19 @@ import {
 	removeToken, removeUser
 } from "../../util/storage";
 
-const Verify = () => {
-    
+const Verify = (props) => {
+
+	const history = useHistory()
+	// const location = useLocation()
+	const email = props.location.state.email;
+	const [username,setUserName] = useState(email)
 	const [code, setCode] = useState('');
 	const [loading, setLoading] = useState(false);
+	const [log,setLog] = useState(false)
+	useEffect(()=>{
+		console.log(props.location.state)
+		setUserName(props.location.state.email)
+	},[])
 
 	const handleSubmit = () => {
 		setLoading(true)
@@ -20,6 +29,7 @@ const Verify = () => {
 			return
 		}
 		Post('/users/verify', {
+			username,
 			code,
 		})
 		.then(({data})=>{
@@ -31,6 +41,7 @@ const Verify = () => {
 				toaster.success(data.message);
 				setUser(data.payload.user);
 				setToken(data.payload.token);
+				data.success ? history.push('setup',{params: data.payload.user}) : toaster.warning("check your network");
 			}
 		})
 		.catch((err)=>{
@@ -69,7 +80,7 @@ const Verify = () => {
 
 						<h3 className="text-center m-0">
 							<Link to="/" onClick={()=> this.props.UpdateLoginAgain()}  className="logo logo-admin">
-								<img src={require("../../assets/images/logo.png")} height="30" alt="logo" />	
+								<img src={require("../../assets/images/logo.png")} height="30" alt="logo" />
 							</Link>
 						</h3>
 

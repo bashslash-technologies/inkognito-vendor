@@ -99,7 +99,10 @@ const ProductsList = () => {
 
 	const fetchProducts = () => {
 		setLoading(true)
-		Get('/products')
+		Get('/products',{
+			page:5,
+			size:10
+		})
 			.then(({data})=>{
 				if (data.message) {
 					toaster.warning(data.message)
@@ -131,16 +134,16 @@ const ProductsList = () => {
 				setLoading(false)
 			})
     }
-    
+
     const handleAcceptedFiles = (files) => {
         files.map(file => Object.assign(file, {
             preview: URL.createObjectURL(file),
             formattedSize: formatBytes(file.size)
         }));
-        
+
         setSelectedImages(files)
     }
-        
+
         /**
         * Formats the size
         */
@@ -149,7 +152,7 @@ const ProductsList = () => {
         const k = 1024;
         const dm = decimals < 0 ? 0 : decimals;
         const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-        
+
         const i = Math.floor(Math.log(bytes) / Math.log(k));
         return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
     }
@@ -178,7 +181,7 @@ const ProductsList = () => {
                     <div className="card m-b-20">
                         <div className="card-body m-0 p-0">
 
-                            
+
 
                             <table id="datatable" className="table table-striped dt-responsive nowrap table-vertical" width="100%" cellspacing="0">
                                 <thead>
@@ -205,14 +208,14 @@ const ProductsList = () => {
                                             <Link to="/admin/products/:product_id" className="m-r-15 text-muted"> <i className="mdi mdi-pencil font-18"></i></Link>
                                             <Link to="#" className="text-muted" ><i className="mdi mdi-close font-18"></i></Link>
                                         </td>
-                                    </tr>))}                                    
+                                    </tr>))}
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
-        
+
             <SideSheet
                 isShown={addProductVisible}
                 onCloseComplete={()=>setAddProductVisible(false)}
@@ -238,7 +241,11 @@ const ProductsList = () => {
                         </Label>
                         <p className="text-muted m-b-30 font-14">Select up to 5 images</p>
                         <section className="my_drop">
-                            <Dropzone onDrop={acceptedFiles => handleAcceptedFiles(acceptedFiles)}>
+                            <Dropzone onDrop={acceptedFiles => {
+                            	handleAcceptedFiles(acceptedFiles)
+								handleImageChange(acceptedFiles)
+
+                            }}>
                                 {({ getRootProps, getInputProps }) => (
                                     <div className="dropzone">
                                         <div className="dz-message needsclick" {...getRootProps()}>
@@ -277,7 +284,7 @@ const ProductsList = () => {
                             inputWidth={400}
                             placeholder="eg. Iphone 11"
                             marginBottom={20}
-                            onChange={(e)=>setName(e.target.value)}	
+                            onChange={(e)=>setName(e.target.value)}
                         />
                         <TextInputField
                             label="Price"
@@ -287,7 +294,7 @@ const ProductsList = () => {
                             inputWidth={400}
                             placeholder="eg. 99.99"
                             marginBottom={20}
-                            onChange={(e)=>setPrice(e.target.value)}	
+                            onChange={(e)=>setPrice(e.target.value)}
                         />
                         <div
                             style={{ flexDirection: 'column', display: 'flex', }}
@@ -311,8 +318,8 @@ const ProductsList = () => {
                     <button disabled={loading} onClick={handleSubmit} className="btn btn-primary" style={{ alignSelf: 'center', display: 'flex', width: 400, justifyContent: 'center', }} >{loading ? "Adding Product":"Add Product"}</button>
                 </Pane>
             </SideSheet>
-        </div> 
+        </div>
     );
 }
 
-export default ProductsList;   
+export default ProductsList;
