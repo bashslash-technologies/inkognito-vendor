@@ -1,5 +1,5 @@
 import React , {useState, useEffect} from 'react';
-import { Link } from 'react-router-dom';
+import { Link,Redirect} from 'react-router-dom';
 import { toaster } from "evergreen-ui";
 import { Post } from "../../util/transport";
 import {
@@ -8,14 +8,15 @@ import {
 } from "../../util/storage";
 
 const Register = () => {
-
 	const [email, setEmail] = useState('');
 	const [name, setName] = useState('');
 	const [phone, setPhone] = useState('');
 	const [password, setPassword] = useState('');
 	const [loading, setLoading] = useState(false);
+	const [verify,setVerify] = useState(false);
 
 	const handleSubmit = () => {
+		console.log(email,name,password,phone)
 		setLoading(true)
 		if(!email) {
 			setLoading(false)
@@ -35,12 +36,12 @@ const Register = () => {
 		if(!password) {
 			setLoading(false)
 			toaster.warning("kindly choose a password")
-			return 
+			return
 		}
-		Post('/users/create', {
+		Post('/users/register', {
 			email,
 			name,
-			contact: phone,
+			phone,
 			password,
 			role: 'VENDOR'
 		})
@@ -52,6 +53,7 @@ const Register = () => {
 			else {
 				toaster.success(data.message);
 				setUser(data.payload.user);
+				data.success ? setVerify(true) : toaster.warning("check your network");
 			}
 		})
 		.catch((err)=>{
@@ -63,9 +65,12 @@ const Register = () => {
 	useEffect(()=>{
 		removeUser();
 		removeToken();
+		console.log(`${process.env.REACT_APP_BASE_URL}`)
+
 	}, [])
 
     return(
+    	!verify ?
 		<>
 			<div className="accountbg"></div>
 			<div className="wrapper-page">
@@ -125,7 +130,7 @@ const Register = () => {
 										id="userpassword"
 										placeholder="Enter password"
 										onChange={(e)=>setPassword(e.target.value)}
-									/> 
+									/>
 								</div>
 
 								<div className="form-group row m-t-20">
@@ -152,6 +157,10 @@ const Register = () => {
 
 			</div>
 		</>
+			: (<Redirect to={
+				{pathname:'verify-phone',
+				state:{email,phone}}
+			}/>)
 	);
 }
 

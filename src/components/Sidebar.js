@@ -1,8 +1,7 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink,useHistory } from 'react-router-dom';
 
 const Sidebar = () => {
-
 	return (
 		<div id="side-panel" className="d-flex flex-column justify-content-between">
 			<ul className="m-0">
@@ -35,7 +34,7 @@ const Sidebar = () => {
 					<NavLink className="nav-link" activeClassName="nav-active" to="/admin/settings"><i className="mdi mdi-settings mr-3"></i>Settings</NavLink>
 				</li>
 				<li>
-					<NavLink className="nav-link" activeClassName="nav-active" to="/admin/reports"><i className="mdi mdi-power mr-3 text-danger"></i>Logout</NavLink>
+					<NavLink className="nav-link" activeClassName="nav-active" to="/auth"><i className="mdi mdi-power mr-3 text-danger"></i>Logout</NavLink>
 				</li>
 			</ul>
 		</div>

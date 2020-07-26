@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { toaster } from "evergreen-ui";
 import { Post } from "../../util/transport";
 import {
@@ -8,7 +8,7 @@ import {
 } from "../../util/storage";
 
 const  Login = () => {
-
+	const history = useHistory();
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [loading, setLoading] = useState(false);
@@ -23,11 +23,13 @@ const  Login = () => {
 		if(!password) {
 			setLoading(false)
 			toaster.warning("kindly enter your password")
-			return 
+			return
 		}
+
 		Post('/users/login', {
 			username,
 			password,
+			role: "VENDOR"
 		})
 		.then(({data})=>{
 			setLoading(false)
@@ -38,6 +40,7 @@ const  Login = () => {
 				toaster.success(data.message);
 				setUser(data.payload.user);
 				setToken(data.payload.token);
+				history.push('/admin')
 			}
 		})
 		.catch((err)=>{
